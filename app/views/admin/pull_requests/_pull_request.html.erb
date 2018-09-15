@@ -1,0 +1,31 @@
+<%= content_tag :tr, id: "pull-request-#{pull_request.id}" do %>
+  <td>
+    <%= link_to pull_request.html_path, pull_request.html_url,
+      title: pull_request.title, target: "_blank",
+      data: {toggle: :tooltip} %>
+  </td>
+  <td>
+    <%= tag.span pull_request.state, class: "state state-#{pull_request.state}" %>
+  </td>
+  <td><%= pull_request.user_name %></td>
+  <td><%= pull_request.current_reviewer %></td>
+  <td>
+    <%= link_to pull_request.full_name, pull_request.repository_html_url,
+      target: "_blank" %>
+  </td>
+  <td>
+    <%= time_tag pull_request.created_at.in_time_zone("Hanoi") %>
+  </td>
+  <td>
+    <%= time_tag pull_request.updated_at.in_time_zone("Hanoi"),
+      class: "timeago" %>
+  </td>
+  <td>
+    <% if pull_request.state_ready? %>
+      <%= button_to "review", admin_pull_request_path(pull_request),
+        method: :patch, remote: true,
+        params: {pull_request: {state: :reviewing}},
+        data: {confirm: "Are you sure?", disable_with: "loading"} %>
+    <% end %>
+  </td>
+<% end %>

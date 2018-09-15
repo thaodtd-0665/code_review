@@ -1,0 +1,17 @@
+en:
+  chatwork:
+    message: |-
+      [To:%{chatwork}] %{name}
+      Your pull request no. #%{number} has been (%{state})
+      %{html_url}
+      
+      %{message}
+
+  omniauth_callbacks:
+    create:
+      failure: "Could not authenticate you from %{kind}."
+      success: "Successfully authenticated from %{kind} account."
+
+  pull_requests:
+    commits: "This pull request has more than 1 commits"
+    changed_files: "This pull request has more than 15 changed files"

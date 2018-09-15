@@ -1,0 +1,30 @@
+@import 'bootstrap';
+
+body {
+  font-size: 14px;
+}
+
+main {
+  margin: 1rem 0 3rem;
+}
+
+.flash {
+  margin-bottom: 1rem;
+}
+
+.state {
+  background-color: #f5f5f5;
+  padding: 3px;
+
+  .state-ready {
+
+  }
+
+  .state-commented {
+
+  }
+
+  .state-merged {
+
+  }
+}

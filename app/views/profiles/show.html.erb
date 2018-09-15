@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <h4>Settings</h4>
+
+    <%= form_for current_user, url: profile_path do |form| %>
+      <% if current_user.chatwork? %>
+        <div class="form-group">
+          <label>Repository</label>
+          <%= link_to "Manage repositories on GitHub", github_app_url,
+            class: "btn btn-block btn-sm btn-success mb-2" %>
+          </a>
+        </div>
+      <% else %>
+        <div class="form-group">        
+          <label>ChatWork</label>
+          <%= link_to "Connect with ChatWork", "/auth/chatwork",
+            class: "btn btn-block btn-sm btn-info mb-2" %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :room_id %>
+        <%= form.select :room_id,
+          options_from_collection_for_select(Room.all, :id, :name),
+          {prompt: true}, {class: "form-control"} %>
+      </div>
+
+      <%= form.button "Update", type: :submit,
+        class: "btn btn-block btn-sm btn-secondary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="filter">
+  <form data-remote="true">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= label_tag :state %>
+        <%= select_tag :state, state_options, class: "form-control" %>
+      </div>
+
+      <div class="form-group col-md-4">
+        <%= label_tag :room %>
+        <%= select_tag :room, room_options, include_blank: "All", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= button_tag "Search", type: :submit, class: "btn btn-primary",
+        data: {disable_with: "Searching ..."} %>
+    </div>
+  </form>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Subject</th>
+      <th scope="col">State</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Reviewer</th>
+      <th scope="col">Repository</th>
+      <th scope="col">Created</th>
+      <th scope="col">Updated</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @pull_requests %>
+  </tbody>
+</table>
+
+<div id="paginator">
+  <%= paginate @pull_requests, remote: true, window: 2 %>
+</div>
