@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <h3 class="text-center">The most active members this month</h3>
+    <table class="table table-hover active-members">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Merged</th>
+        <th scope="col">Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "pages/user", collection: @users %>
+    </tbody>
+  </table>
+  </div>
+</div>

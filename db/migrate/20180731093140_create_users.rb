@@ -13,5 +13,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     end
 
     add_index :users, :chatwork, unique: true
+    add_index :users, :room_id
   end
 end
