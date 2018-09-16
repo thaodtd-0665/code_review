@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_08_02_110748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id", "number"], name: "index_pull_requests_on_repository_id_and_number", unique: true
+    t.index ["user_id"], name: "index_pull_requests_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_08_02_110748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chatwork"], name: "index_users_on_chatwork", unique: true
+    t.index ["room_id"], name: "index_users_on_room_id"
   end
 
 end

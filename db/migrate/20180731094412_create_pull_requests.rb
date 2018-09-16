@@ -13,5 +13,6 @@ class CreatePullRequests < ActiveRecord::Migration[5.2]
     end
 
     add_index :pull_requests, %i[repository_id number], unique: true
+    add_index :pull_requests, :user_id
   end
 end
