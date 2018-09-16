@@ -5,8 +5,7 @@ class PullRequestsController < ApplicationController
     @pull_requests = PullRequest.joins(:user).includes(:user)
                                 .by_state(params[:state])
                                 .by_room(params[:room])
-                                .newest
-                                .page params[:page]
+                                .newest.page params[:page]
 
     respond_to :html, :js
   end

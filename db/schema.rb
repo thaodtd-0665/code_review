@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_08_02_110748) do
     t.integer "role", default: 0
     t.bigint "chatwork"
     t.bigint "room_id"
+    t.integer "merged", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chatwork"], name: "index_users_on_chatwork", unique: true
