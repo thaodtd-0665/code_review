@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   validate :room_vaild, on: :update
 
+  scope :merged_great_than, (lambda do |number_param|
+    where arel_table[:merged].gt number_param
+  end)
+
   delegate :name, to: :room, prefix: true, allow_nil: true
 
   def html_url

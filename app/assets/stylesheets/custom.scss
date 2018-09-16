@@ -12,16 +12,6 @@ main {
   margin-bottom: 1rem;
 }
 
-.active-members {
-  table {
-    counter-reset: rank;
-  }
-  tbody th:before {
-    content: counter(rank);
-    counter-increment: rank;
-  }
-}
-
 .state {
   background-color: #3181fa;
   color: #fff;

@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.integer :role, default: 0
       t.bigint :chatwork
       t.bigint :room_id
+      t.integer :merged, default: 0
 
       t.timestamps
     end

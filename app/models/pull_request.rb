@@ -8,10 +8,16 @@ class PullRequest < ApplicationRecord
 
   before_save :remove_current_reviewer, on: :update
   after_create_commit{sync_data}
-  after_update_commit{sync_data if previous_changes.key?(:state)}
+
+  after_update_commit do
+    previous_changes.key?(:state) || return
+    sync_data
+
+    state_merged? || return
+    user&.increment! :merged
+  end
 
   scope :newest, ->{order updated_at: :desc}
-  scope :merged, ->{where state: :merged}
 
   scope :by_state, (lambda do |state_param|
     state_param = state_param.present? ? state_param.to_i : 1
@@ -20,10 +26,6 @@ class PullRequest < ApplicationRecord
 
   scope :by_room, (lambda do |room_param|
     where users: {room_id: room_param.to_i} if room_param.present?
-  end)
-
-  scope :in_this_month, (lambda do
-    where created_at: Time.current.beginning_of_month..Time.current.end_of_month
   end)
 
   delegate :name, :room_id, :chatwork, :html_url,
