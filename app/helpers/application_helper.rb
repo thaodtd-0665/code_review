@@ -5,12 +5,12 @@ module ApplicationHelper
   end
 
   def state_options
-    selected = params[:state] ? params[:state].to_i : 1
+    selected = params[:state].nil? ? 1 : params[:state].to_i
     options_for_select PullRequest.states, selected
   end
 
   def room_options
-    selected = current_user.room_id || params[:room_id].to_i
+    selected = params[:room].nil? ? current_user.room_id : params[:room].to_i
     options_from_collection_for_select Room.all, :id, :name, selected
   end
 end
