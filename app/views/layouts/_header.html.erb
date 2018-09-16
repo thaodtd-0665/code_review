@@ -8,7 +8,7 @@
       <ul class="navbar-nav">
         <% if current_user.reviewer? %>
           <li class="nav-item">
-            <%= link_to "Pull Requests", admin_pull_requests_path, class: "nav-link" %>
+            <%= link_to "Pull Requests", pull_requests_path, class: "nav-link" %>
           </li>
         <% end %>
         <li class="nav-item active">

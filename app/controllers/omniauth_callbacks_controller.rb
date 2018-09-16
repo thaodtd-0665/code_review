@@ -12,6 +12,6 @@ class OmniauthCallbacksController < ApplicationController
       flash[:error] = t ".failure", kind: params[:provider].humanize
     end
 
-    redirect_to root_path
+    redirect_to profile_path
   end
 end

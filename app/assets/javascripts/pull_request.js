@@ -1,4 +1,4 @@
-if (location.pathname == '/admin/pull_requests') {
+if (location.pathname == '/pull_requests') {
   $(function() {
     $('time.timeago').timeago()
     $('[data-toggle="tooltip"]').tooltip()
