@@ -23,18 +23,32 @@ main {
 }
 
 .state {
-  background-color: #f5f5f5;
-  padding: 3px;
+  background-color: #3181fa;
+  color: #fff;
+  font-weight: 500;
+  padding: 5px 10px;
+}
 
-  .state-ready {
+.state-ready {
+  background-color: #fbbc05;
+}
 
-  }
+.state-reviewing {
+  background-color: #ea4335;
+}
 
-  .state-commented {
+.state-commented {
+  background-color: #30c352;
+}
 
-  }
+.state-conflicted {
+  background-color: #6a737d;
+}
 
-  .state-merged {
+.state-merged {
+  background-color: #6f42c1
+}
 
-  }
+.state-closed {
+  background-color: #000;
 }
