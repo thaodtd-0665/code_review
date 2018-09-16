@@ -1,5 +1,5 @@
-class Admin::PullRequestsController < Admin::BaseController
-  before_action :load_pull_request, only: :update
+class PullRequestsController < ApplicationController
+  before_action :ensure_reviewer!, :load_pull_request, only: :update
 
   def index
     @pull_requests = PullRequest.joins(:user).includes(:user)
@@ -20,6 +20,11 @@ class Admin::PullRequestsController < Admin::BaseController
   end
 
   private
+
+  def ensure_reviewer!
+    return if current_user.reviewer?
+    head :forbidden
+  end
 
   def load_pull_request
     @pull_request = PullRequest.find_by id: params[:id]

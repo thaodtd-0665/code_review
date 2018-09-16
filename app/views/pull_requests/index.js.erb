@@ -1,5 +1,5 @@
 $('tbody').html('<%= j render @pull_requests %>')
-$('#paginator').html('<%= j paginate @pull_requests, remote: true, window: 2 %>')
+$('#paginator').html('<%= j paginate @pull_requests, remote: true %>')
 $('time.timeago').timeago()
 $('[data-toggle="tooltip"]').tooltip()
 $('html, body').animate({scrollTop: 0}, 800);

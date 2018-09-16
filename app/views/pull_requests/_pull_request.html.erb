@@ -22,8 +22,7 @@
   </td>
   <td>
     <% if pull_request.state_ready? %>
-      <%= button_to "review", admin_pull_request_path(pull_request),
-        method: :patch, remote: true,
+      <%= button_to "review", pull_request, method: :patch, remote: true,
         params: {pull_request: {state: :reviewing}},
         data: {confirm: "Are you sure?", disable_with: "loading"} %>
     <% end %>

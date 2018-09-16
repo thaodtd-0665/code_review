@@ -9,7 +9,6 @@ module ApplicationCable
     protected
 
     def find_user
-      # TODO: only reviewer can connect
       user = User.find_by id: cookies.encrypted[:user_id]
       user || reject_unauthorized_connection
     end

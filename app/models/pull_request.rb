@@ -43,9 +43,9 @@ class PullRequest < ApplicationRecord
   end
 
   def sync_data
-    ActionCable.server.broadcast "admin:pull_requests",
+    ActionCable.server.broadcast "pull_requests",
       node: "#pull-request-#{id}",
-      html: Admin::PullRequestsController.render(self)
+      html: PullRequestsController.render(self)
 
     ChatworkService.call self, message
   end
