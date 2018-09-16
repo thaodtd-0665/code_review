@@ -7,7 +7,8 @@ class PullRequest < ApplicationRecord
   belongs_to :user, optional: true
 
   before_save :remove_current_reviewer, on: :update
-  after_commit :sync_data
+  after_create_commit{sync_data}
+  after_update_commit{sync_data if previous_changes.key?(:state)}
 
   scope :newest, ->{order updated_at: :desc}
 
@@ -42,8 +43,6 @@ class PullRequest < ApplicationRecord
   end
 
   def sync_data
-    return unless previous_changes.key? :state
-
     ActionCable.server.broadcast "admin:pull_requests",
       node: "#pull-request-#{id}",
       html: Admin::PullRequestsController.render(self)
