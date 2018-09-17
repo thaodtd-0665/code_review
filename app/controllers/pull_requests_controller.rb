@@ -5,6 +5,7 @@ class PullRequestsController < ApplicationController
     @pull_requests = PullRequest.joins(:user).includes(:user)
                                 .by_state(params[:state])
                                 .by_room(params[:room])
+                                .by_repository(params[:repository].to_a)
                                 .newest.page params[:page]
 
     respond_to :html, :js

@@ -8,6 +8,11 @@ if (location.pathname == '/') {
       let path = `${location.pathname}?${query}`
       history.pushState(null, null, path)
     })
+
+    $('.js-repositories').select2({
+      allowClear: true,
+      theme: 'bootstrap4'
+    })
   })
 
   App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {

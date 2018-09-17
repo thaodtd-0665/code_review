@@ -11,6 +11,12 @@
         <%= select_tag :room, room_options,
           include_blank: "All", class: "form-control" %>
       </div>
+
+      <div class="form-group col-md-6">
+        <%= label_tag :repository %>
+        <%= select_tag :repository, repository_options,
+          multiple: true, class: "form-control js-repositories" %>
+      </div>
     </div>
 
     <div class="form-group">

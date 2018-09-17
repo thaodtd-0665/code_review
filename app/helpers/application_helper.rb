@@ -13,4 +13,11 @@ module ApplicationHelper
     selected = params[:room].nil? ? current_user.room_id : params[:room].to_i
     options_from_collection_for_select Room.all, :id, :name, selected
   end
+
+  def repository_options
+    selected = params[:repository].to_a.map &:to_i
+    repositories = PullRequest.distinct.select :repository_id, :full_name
+    options_from_collection_for_select repositories,
+      :repository_id, :full_name, selected
+  end
 end
