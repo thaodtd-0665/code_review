@@ -13,8 +13,8 @@ class PullRequest < ApplicationRecord
     previous_changes.key?(:state) || return
     sync_data
 
-    state_merged? || return
-    user&.increment! :merged
+    # state_merged? || return
+    # user&.increment! :merged
   end
 
   scope :newest, ->{order updated_at: :desc}

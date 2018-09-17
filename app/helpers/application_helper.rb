@@ -13,9 +13,4 @@ module ApplicationHelper
     selected = params[:room].nil? ? current_user.room_id : params[:room].to_i
     options_from_collection_for_select Room.all, :id, :name, selected
   end
-
-  # def members
-  #   User.includes(:room).merged_great_than(0)
-  #       .order(merged: :desc).limit 5
-  # end
 end
