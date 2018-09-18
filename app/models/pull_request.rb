@@ -57,6 +57,9 @@ class PullRequest < ApplicationRecord
   def sync_data
     ActionCable.server.broadcast "pull_requests",
       node: "#pull-request-#{id}",
+      state: state_before_type_cast.to_s,
+      room_id: user_room_id.to_s,
+      repository_id: repository_id.to_s,
       html: PullRequestsController.render(self)
 
     ChatworkService.call self, message
