@@ -25,9 +25,25 @@ if (location.pathname == '/') {
     received: function(data) {
       if ($(data.node).length) {
         $(data.node).replaceWith(data.html)
-        $(`${data.node} time.timeago`).timeago()
-        $(`${data.node} [data-toggle="tooltip"]`).tooltip()
+      } else {
+        let state = $('.filter #state').val(),
+            room_id = $('.filter #room').val(),
+            repository_ids = $('.filter #repository').val()
+
+        if (!(state == data.state))
+          return
+
+        if (!(room_id.length || room_id == data.room_id))
+          return
+
+        if (!(repository_ids.length || repository_ids.includes(data.repository_id)))
+          return
+
+        $('tbody').prepend(data.html)
       }
+
+      $(`${data.node} time.timeago`).timeago()
+      $(`${data.node} [data-toggle="tooltip"]`).tooltip()
     }
   })
 }
