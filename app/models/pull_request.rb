@@ -28,6 +28,11 @@ class PullRequest < ApplicationRecord
     where users: {room_id: room_param.to_i} if room_param.present?
   end)
 
+  scope :by_repository, (lambda do |repository_param|
+    repository_param = repository_param.reject &:blank?
+    where repository_id: repository_param if repository_param.any?
+  end)
+
   delegate :name, :room_id, :chatwork, :html_url,
     to: :user, prefix: true, allow_nil: true
 

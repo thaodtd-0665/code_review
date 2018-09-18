@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery.timeago
+//= require select2.full
 //= require popper
 //= require bootstrap
 //= require rails-ujs
