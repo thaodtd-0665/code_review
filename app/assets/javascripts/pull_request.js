@@ -3,13 +3,17 @@ if (location.pathname == '/') {
     $('time.timeago').timeago()
     $('[data-toggle="tooltip"]').tooltip()
 
-    $('.filter form').submit(function() {
-      let query = $(this).serialize()
+    $('.filter select').change(function() {
+      let form = document.getElementById('filter-form')
+      Rails.fire(form, 'submit')
+
+      let query = $(form).serialize()
       let path = `${location.pathname}?${query}`
       history.pushState(null, null, path)
     })
 
     $('.js-repositories').select2({
+      placeholder: '',
       allowClear: true,
       theme: 'bootstrap4'
     })

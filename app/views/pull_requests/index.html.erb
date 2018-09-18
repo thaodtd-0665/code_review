@@ -1,5 +1,5 @@
 <div class="filter">
-  <form data-remote="true">
+  <form id="filter-form" data-remote="true">
     <div class="form-row">
       <div class="form-group col-md-2">
         <%= label_tag :state %>
@@ -17,11 +17,6 @@
         <%= select_tag :repository, repository_options,
           multiple: true, class: "form-control js-repositories" %>
       </div>
-    </div>
-
-    <div class="form-group">
-      <%= button_tag "Search", type: :submit, class: "btn btn-primary",
-        data: {disable_with: "Searching ..."} %>
     </div>
   </form>
 </div>
