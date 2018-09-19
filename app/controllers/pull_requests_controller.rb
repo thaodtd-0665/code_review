@@ -2,7 +2,7 @@ class PullRequestsController < ApplicationController
   before_action :ensure_reviewer!, :load_pull_request, only: :update
 
   def index
-    @pull_requests = PullRequest.joins(:user)
+    @pull_requests = PullRequest.left_outer_joins(:user)
                                 .by_state(helpers.selected_states)
                                 .by_room(helpers.selected_room)
                                 .by_repository(helpers.selected_repositories)
