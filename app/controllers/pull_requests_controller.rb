@@ -2,10 +2,10 @@ class PullRequestsController < ApplicationController
   before_action :ensure_reviewer!, :load_pull_request, only: :update
 
   def index
-    @pull_requests = PullRequest.joins(:user).includes(:user)
-                                .by_state(params[:state])
-                                .by_room(params[:room])
-                                .by_repository(params[:repository].to_a)
+    @pull_requests = PullRequest.joins(:user)
+                                .by_state(helpers.selected_states)
+                                .by_room(helpers.selected_room)
+                                .by_repository(helpers.selected_repositories)
                                 .newest.page params[:page]
 
     respond_to :html, :js

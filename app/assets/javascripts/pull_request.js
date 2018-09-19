@@ -12,6 +12,12 @@ if (location.pathname == '/') {
       history.pushState(null, null, path)
     })
 
+    $('.js-states').select2({
+      placeholder: '',
+      allowClear: true,
+      theme: 'bootstrap4'
+    })
+
     $('.js-repositories').select2({
       placeholder: '',
       allowClear: true,

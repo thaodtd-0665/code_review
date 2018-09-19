@@ -8,20 +8,20 @@ class PullRequest < ApplicationRecord
 
   before_save :remove_current_reviewer, on: :update
   after_create_commit{sync_data}
+  after_update_commit{sync_data if previous_changes.key?(:state)}
 
-  after_update_commit do
-    previous_changes.key?(:state) || return
-    sync_data
+  # after_update_commit do
+  #   previous_changes.key?(:state) || return
+  #   sync_data
 
-    # state_merged? || return
-    # user&.increment! :merged
-  end
+  #   state_merged? || return
+  #   user&.increment! :merged
+  # end
 
   scope :newest, ->{order updated_at: :desc}
 
   scope :by_state, (lambda do |state_param|
-    state_param = state_param.present? ? state_param.to_i : 1
-    where state: state_param
+    where state: state_param if state_param.any?
   end)
 
   scope :by_room, (lambda do |room_param|
@@ -29,7 +29,6 @@ class PullRequest < ApplicationRecord
   end)
 
   scope :by_repository, (lambda do |repository_param|
-    repository_param = repository_param.reject &:blank?
     where repository_id: repository_param if repository_param.any?
   end)
 

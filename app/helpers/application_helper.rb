@@ -4,20 +4,36 @@ module ApplicationHelper
     "https://github.com/apps/#{app_name}/installations/new"
   end
 
+  def selected_states
+    states = params[:state].to_a.reject(&:blank?)
+    states.any? ? states : [1, 2]
+  end
+
+  def selected_room
+    if params[:room].nil?
+      current_user.room_id 
+    else
+      params[:room].to_s
+    end
+  end
+
+  def selected_repositories
+    params[:repository].to_a.reject(&:blank?)
+  end
+
   def state_options
-    selected = params[:state].nil? ? 1 : params[:state].to_i
-    options_for_select PullRequest.states, selected
+    options_for_select PullRequest.states, selected_states
   end
 
   def room_options
-    selected = params[:room].nil? ? current_user.room_id : params[:room].to_i
-    options_from_collection_for_select Room.all, :id, :name, selected
+    options_from_collection_for_select Room.all, :id, :name, selected_room
   end
 
   def repository_options
-    selected = params[:repository].to_a.map &:to_i
-    repositories = PullRequest.distinct.select :repository_id, :full_name
+    repositories = PullRequest.distinct
+                              .order(full_name: :asc)
+                              .select :repository_id, :full_name
     options_from_collection_for_select repositories,
-      :repository_id, :full_name, selected
+      :repository_id, :full_name, selected_repositories
   end
 end
