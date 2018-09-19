@@ -36,17 +36,17 @@ if (location.pathname == '/') {
       if ($(data.node).length) {
         $(data.node).replaceWith(data.html)
       } else {
-        let state = $('.filter #state').val(),
+        let states = $('.filter #state').val(),
             room_id = $('.filter #room').val(),
             repository_ids = $('.filter #repository').val()
 
-        if (!(state == data.state))
+        if (!states.includes(data.state))
           return
 
-        if (!(room_id.length || room_id == data.room_id))
+        if (!(room_id.length == 0 || room_id == data.room_id))
           return
 
-        if (!(repository_ids.length || repository_ids.includes(data.repository_id)))
+        if (!(repository_ids.length == 0 || repository_ids.includes(data.repository_id)))
           return
 
         $('tbody').prepend(data.html)
