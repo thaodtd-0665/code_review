@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     return if logged_in?
-    render "shared/login"
+    render "shared/login", layout: false
   end
 end
