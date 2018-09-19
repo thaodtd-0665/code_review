@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
     if current_user.update user_params
       flash[:success] = "Updated"
     else
-      flash[:danger] = "Update failed"
+      flash[:danger] = current_user.errors.full_messages.first
     end
 
     redirect_to profile_path
