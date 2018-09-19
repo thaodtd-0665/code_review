@@ -24,7 +24,7 @@
     <% if pull_request.state_ready? %>
       <%= button_to "review", pull_request, method: :patch, remote: true,
         params: {pull_request: {state: :reviewing}},
-        data: {confirm: "Are you sure?", disable_with: "loading"},
+        data: {disable_with: "loading"},
         class: "btn btn-sm btn-danger" %>
     <% end %>
   </td>

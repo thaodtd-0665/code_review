@@ -10,6 +10,7 @@ if (location.pathname == '/') {
       let query = $(form).serialize()
       let path = `${location.pathname}?${query}`
       history.pushState(null, null, path)
+      localStorage.setItem('last-session', path)
     })
 
     $('.js-states').select2({

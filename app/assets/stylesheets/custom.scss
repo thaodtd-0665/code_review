@@ -1,3 +1,4 @@
+@import 'variables';
 @import 'bootstrap';
 
 html {
@@ -5,7 +6,7 @@ html {
 }
 
 body {
-  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
   min-height:100%;
 }
 
