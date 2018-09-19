@@ -1,5 +1,9 @@
 @import 'bootstrap';
 
+html, body {
+  min-height: 100%;
+}
+
 body {
   font-size: 14px;
 }
