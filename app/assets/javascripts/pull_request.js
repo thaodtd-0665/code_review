@@ -21,10 +21,10 @@ if (location.pathname == '/') {
 
   App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {
     connected: function() {
-      console.log('connected')
+      $('.offline-notification').hide()
     },
     disconnected: function() {
-      console.log('disconnected')
+      $('.offline-notification').show()
     },
     received: function(data) {
       if ($(data.node).length) {
