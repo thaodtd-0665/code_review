@@ -1,11 +1,12 @@
 @import 'bootstrap';
 
-html, body {
-  min-height: 100%;
+html {
+  height:100%;
 }
 
 body {
   font-size: 14px;
+  min-height:100%;
 }
 
 main {
