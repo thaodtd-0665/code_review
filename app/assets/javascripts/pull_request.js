@@ -1,7 +1,6 @@
 if (location.pathname == '/') {
   $(function() {
     $('time.timeago').timeago()
-    $('[data-toggle="tooltip"]').tooltip()
 
     $('.filter select').change(function() {
       let form = document.getElementById('filter-form')
@@ -54,7 +53,6 @@ if (location.pathname == '/') {
       }
 
       $(`${data.node} time.timeago`).timeago()
-      $(`${data.node} [data-toggle="tooltip"]`).tooltip()
     }
   })
 }
