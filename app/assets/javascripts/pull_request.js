@@ -3,13 +3,16 @@ if (location.pathname == '/') {
     $('time.timeago').timeago()
 
     $('.filter select').change(function() {
-      let form = document.getElementById('filter-form')
-      Rails.fire(form, 'submit')
-
-      let query = $(form).serialize()
-      let path = `${location.pathname}?${query}`
-      history.pushState(null, null, path)
-      localStorage.setItem('last-session', path)
+      $.ajax({
+        url: $('.filter form').attr('action'),
+        method: 'GET',
+        data: {
+          state: $('.filter #state').val().concat(''),
+          room: $('.filter #room').val(),
+          repository: $('.filter #repository').val().concat('')
+        },
+        dataType: 'script'
+      })
     })
 
     $('.js-states').select2({

@@ -11,7 +11,7 @@ class PullRequestService
 
   def call
     return if payload[:action] == "synchronize"
-    # TODO: merged and closed
+
     pull_request = PullRequest.find_or_initialize_by pull_request_params
     pull_request.assign_attributes pull_request_info
     pull_request.save || pull_request.errors.full_messages.to_sentence

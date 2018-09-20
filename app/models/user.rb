@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   enum role: %i[normal reviewer]
 
+  store_accessor :settings, :last_states, :last_room, :last_repositories
+
   belongs_to :room, optional: true
   has_many :pull_requests, dependent: :destroy
 
@@ -11,6 +13,18 @@ class User < ApplicationRecord
   end)
 
   delegate :name, to: :room, prefix: true, allow_nil: true
+
+  def last_states
+    super || [1, 2]
+  end
+
+  def last_room
+    super || room_id
+  end
+
+  def last_repositories
+    super.to_a
+  end
 
   def html_url
     "https://github.com/#{login}"
