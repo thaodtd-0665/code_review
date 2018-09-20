@@ -1,8 +1,16 @@
 en:
   chatwork:
+    state:
+      open: "has been opened (clap)"
+      ready: "is ready. Good luck to you!"
+      reviewing: "is under reviewing"
+      commented: "has been (commented)"
+      conflicted: "is conflicted"
+      merged: "has been (merged)\n:* Please update your redmine ticket!"
+      closed: "has been closed (devil)"
     message: |-
       [To:%{chatwork}] %{name}
-      Your pull request no. #%{number} has been (%{state})
+      Your pull request no. #%{number} %{status}
       %{html_url}
       
       %{message}
@@ -15,3 +23,4 @@ en:
   pull_requests:
     commits: "This pull request has more than 1 commits"
     changed_files: "This pull request has more than 15 changed files"
+    kill: "(tat2)"

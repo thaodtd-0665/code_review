@@ -13,10 +13,11 @@ class ChatworkService
   def call
     return unless valid?
 
+    status = I18n.t "chatwork.state.#{pull_request.state}"
     body = I18n.t "chatwork.message", name: pull_request.user_name,
       chatwork: pull_request.user_chatwork,
       number: pull_request.number,
-      state: pull_request.state,
+      status: status,
       html_url: pull_request.html_url,
       message: message
 

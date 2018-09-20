@@ -11,7 +11,7 @@ class PullRequestService
 
   def call
     return if payload[:action] == "synchronize"
-
+    # TODO: merged and closed
     pull_request = PullRequest.find_or_initialize_by pull_request_params
     pull_request.assign_attributes pull_request_info
     pull_request.save || pull_request.errors.full_messages.to_sentence
@@ -48,6 +48,7 @@ class PullRequestService
     messages = []
     messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
     messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
-    messages.to_sentence
+    messages.push I18n.t("pull_requests.kill") if messages.length > 0
+    messages.join "\n"
   end
 end
