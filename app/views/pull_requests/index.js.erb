@@ -1,6 +1,4 @@
-$('[data-toggle="tooltip"]').tooltip('hide')
 $('tbody').html('<%= j render @pull_requests %>')
 $('#paginator').html('<%= j paginate @pull_requests, remote: true %>')
 $('time.timeago').timeago()
 $('html, body').animate({scrollTop: 0}, 800)
-$('[data-toggle="tooltip"]').tooltip('show')
