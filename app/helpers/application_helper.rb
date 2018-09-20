@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def selected_room
     if params[:room].nil?
-      current_user.room_id 
+      current_user.room_id
     else
       params[:room].to_s
     end

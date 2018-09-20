@@ -31,9 +31,17 @@ class PullRequestService
       title: payload[:pull_request][:title],
       full_name: payload[:repository][:full_name],
       user_id: payload[:pull_request][:user][:id],
-      state: payload[:pull_request][:state],
+      state: pull_request_state,
       message: watching_you
     }
+  end
+
+  def pull_request_state
+    if payload[:pull_request][:merged]
+      "merged"
+    else
+      payload[:pull_request][:state]
+    end
   end
 
   def pull_request_commits
@@ -48,7 +56,7 @@ class PullRequestService
     messages = []
     messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
     messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
-    messages.push I18n.t("pull_requests.kill") if messages.length > 0
+    messages.push I18n.t("pull_requests.kill") if messages.length.positive?
     messages.join "\n"
   end
 end
