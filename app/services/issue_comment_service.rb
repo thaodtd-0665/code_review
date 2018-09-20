@@ -28,10 +28,6 @@ class IssueCommentService
     payload[:action] == "created" && payload[:issue][:pull_request].present?
   end
 
-  def command_valid?
-    %w[commented conflicted merged].include? comment.command
-  end
-
   def issue_user_id
     @issue_user_id ||= payload[:issue][:user][:id]
   end
@@ -64,8 +60,6 @@ class IssueCommentService
   end
 
   def review_issue_command
-    return unless command_valid?
-
     user = User.find_by id: comment_user_id
     return unless user&.reviewer?
 
