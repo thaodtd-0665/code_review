@@ -4,9 +4,18 @@ class HooksController < ActionController::API
   before_action :check_signature!, only: :create
 
   def create
-    event = request.headers["X-GitHub-Event"]
     payload = JSON.parse raw_post, symbolize_names: true
-    plain = "#{event}_service".classify.constantize.call payload
+
+    plain =
+      case request.headers["X-GitHub-Event"]
+      when "pull_request"
+        PullRequestService.call payload
+      when "issue_comment"
+        IssueCommentService.call payload
+      else
+        "Unmatch!"
+      end
+
     render plain: plain
   end
 
