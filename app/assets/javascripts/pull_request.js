@@ -1,8 +1,15 @@
 if (location.pathname == '/') {
   $(function() {
+    function debounce(cb, time = 250, interval) {
+      return function(...args) {
+        clearTimeout(interval)
+        interval = setTimeout(cb, time, ...args)
+      }
+    }
+
     $('time.timeago').timeago()
 
-    $('.filter select').change(function() {
+    $('.filter select').change(debounce(function() {
       $.ajax({
         url: $('.filter form').attr('action'),
         method: 'GET',
@@ -13,7 +20,7 @@ if (location.pathname == '/') {
         },
         dataType: 'script'
       })
-    })
+    }))
 
     $('.js-states').select2({
       placeholder: '',
