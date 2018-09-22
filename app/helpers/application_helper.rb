@@ -5,20 +5,27 @@ module ApplicationHelper
   end
 
   def selected_states
-    states = params[:state].to_a.reject(&:blank?)
-    states.any? ? states : [1, 2]
+    if params[:state].nil?
+      current_user.last_states
+    else
+      params[:state].to_a.reject(&:blank?)
+    end
   end
 
   def selected_room
     if params[:room].nil?
-      current_user.room_id
+      current_user.last_room
     else
       params[:room].to_s
     end
   end
 
   def selected_repositories
-    params[:repository].to_a.reject(&:blank?)
+    if params[:repository].nil?
+      current_user.last_repositories
+    else
+      params[:repository].to_a.reject(&:blank?)
+    end
   end
 
   def state_options

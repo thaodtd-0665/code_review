@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.bigint :chatwork
       t.bigint :room_id
       t.integer :merged, default: 0
+      t.jsonb :settings
 
       t.timestamps
     end

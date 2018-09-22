@@ -8,7 +8,10 @@ class PullRequestsController < ApplicationController
                                 .by_repository(helpers.selected_repositories)
                                 .newest.page params[:page]
 
-    respond_to :html, :js
+    respond_to do |format|
+      format.html
+      format.js{save_session}
+    end
   end
 
   def update
@@ -24,6 +27,12 @@ class PullRequestsController < ApplicationController
   def ensure_reviewer!
     return if current_user.reviewer?
     head :forbidden
+  end
+
+  def save_session
+    current_user.update last_states: helpers.selected_states,
+      last_room: helpers.selected_room,
+      last_repositories: helpers.selected_repositories
   end
 
   def load_pull_request
