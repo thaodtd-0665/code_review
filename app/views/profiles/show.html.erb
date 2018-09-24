@@ -3,14 +3,14 @@
     <h4>Settings</h4>
 
     <%= form_for current_user, url: profile_path do |form| %>
-      <% if current_user.chatwork? %>
-        <div class="form-group">
-          <label>Repository</label>
-          <%= link_to "Manage repositories on GitHub", github_app_url,
-            class: "btn btn-block btn-sm btn-success mb-2" %>
-          </a>
-        </div>
-      <% else %>
+      <div class="form-group">
+        <label>Repository</label>
+        <%= link_to "Manage repositories on GitHub", github_app_url,
+          class: "btn btn-block btn-sm btn-success mb-2" %>
+        </a>
+      </div>
+
+      <% unless current_user.chatwork? %>
         <div class="form-group">        
           <label>ChatWork</label>
           <%= link_to "Connect with ChatWork", "/auth/chatwork",
