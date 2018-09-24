@@ -50,4 +50,13 @@ RailsAdmin.config do |config|
       field :description
     end
   end
+
+  config.model PullRequest.name do
+    field :id
+    field :title
+    field :full_name
+    field :number
+    field :user_id
+    field :state
+  end
 end
