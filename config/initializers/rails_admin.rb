@@ -38,7 +38,7 @@ RailsAdmin.config do |config|
       field :email
       field :role
       field :chatwork
-      field :room_id
+      field :room
       field :admin
     end
   end
@@ -56,7 +56,7 @@ RailsAdmin.config do |config|
     field :title
     field :full_name
     field :number
-    field :user_id
+    field :user
     field :state
   end
 end
