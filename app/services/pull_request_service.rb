@@ -28,6 +28,7 @@ class PullRequestService
 
   def pull_request_info
     @pull_request_info ||= {
+      id: payload[:pull_request][:id],
       title: payload[:pull_request][:title],
       full_name: payload[:repository][:full_name],
       user_id: payload[:pull_request][:user][:id],
