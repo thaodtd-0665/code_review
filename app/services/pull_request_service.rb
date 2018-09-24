@@ -10,7 +10,7 @@ class PullRequestService
   end
 
   def call
-    return if payload[:action] == "synchronize"
+    return unless valid?
 
     pull_request = PullRequest.find_or_initialize_by pull_request_params
     pull_request.assign_attributes pull_request_info
@@ -18,6 +18,10 @@ class PullRequestService
   end
 
   private
+
+  def valid?
+    %w[opened closed reopened].include? payload[:action]
+  end
 
   def pull_request_params
     @pull_request_params ||= {
