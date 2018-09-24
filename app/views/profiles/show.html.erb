@@ -21,7 +21,7 @@
       <div class="form-group">
         <%= form.label :room_id %>
         <%= form.select :room_id,
-          options_from_collection_for_select(Room.all, :id, :name),
+          options_from_collection_for_select(Room.all, :id, :name, current_user.room_id),
           {prompt: true}, {class: "form-control"} %>
       </div>
 
