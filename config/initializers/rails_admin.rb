@@ -17,6 +17,8 @@ RailsAdmin.config do |config|
     delete
   end
 
+  config.total_columns_width = 1000
+
   config.model User.name do
     list do
       field :id
@@ -25,6 +27,7 @@ RailsAdmin.config do |config|
       field :email
       field :role
       field :chatwork
+      field :admin
     end
 
     edit do
@@ -36,6 +39,7 @@ RailsAdmin.config do |config|
       field :role
       field :chatwork
       field :room_id
+      field :admin
     end
   end
 
