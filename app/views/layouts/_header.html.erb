@@ -21,16 +21,14 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <% if current_user.chatwork? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              (<%= current_user.role %>) <strong><%= current_user.name %></strong>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <%= link_to "Logout", profile_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            [<%= current_user.role %>] <strong><%= current_user.display_name %></strong>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Logout", profile_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>

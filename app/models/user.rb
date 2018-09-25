@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   delegate :name, to: :room, prefix: true, allow_nil: true
 
+  def display_name
+    chatwork? ? name : "@#{login}"
+  end
+
   def last_states
     super || [1, 2]
   end

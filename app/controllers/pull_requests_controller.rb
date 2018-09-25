@@ -43,6 +43,6 @@ class PullRequestsController < ApplicationController
 
   def pull_request_params
     data = params.require(:pull_request).permit :state
-    data.merge current_reviewer: current_user.name
+    data.merge current_reviewer: current_user.display_name
   end
 end
