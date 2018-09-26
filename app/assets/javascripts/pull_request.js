@@ -35,7 +35,7 @@ if (location.pathname == '/') {
         },
         dataType: 'script'
       })
-    }))
+    })).change(notify)
 
     $('.js-states').select2({
       placeholder: '',
