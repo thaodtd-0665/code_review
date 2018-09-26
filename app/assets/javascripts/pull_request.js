@@ -1,5 +1,10 @@
 if (location.pathname == '/') {
   $(function() {
+    FaviconNotification.init({
+      color: '#ffc700',
+      lineColor:'#feecad'
+    })
+
     function debounce(cb, time = 250, interval) {
       return function(...args) {
         clearTimeout(interval)
@@ -18,7 +23,13 @@ if (location.pathname == '/') {
         },
         dataType: 'json'
       }).done(function(data) {
-        document.title = data.count > 0 ? `(${data.count}) ${title}` : title
+        if (data.count > 0) {
+          FaviconNotification.add()
+          document.title = `(${data.count}) ${title}`
+        } else {
+          FaviconNotification.remove()
+          document.title = title
+        }
       })
     }, 1000)
 
