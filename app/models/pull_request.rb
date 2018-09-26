@@ -25,7 +25,7 @@ class PullRequest < ApplicationRecord
   end)
 
   scope :by_room, (lambda do |room_param|
-    where users: {room_id: room_param.to_i} if room_param.present?
+    where users: {room_id: room_param} if room_param.any?
   end)
 
   scope :by_repository, (lambda do |repository_param|

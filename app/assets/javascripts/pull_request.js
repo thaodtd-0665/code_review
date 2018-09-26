@@ -18,7 +18,7 @@ if (location.pathname == '/') {
         url: '/pull_requests/status',
         method: 'GET',
         data: {
-          room: $('.filter #room').val(),
+          room: $('.filter #room').val().concat(''),
           repository: $('.filter #repository').val().concat('')
         },
         dataType: 'json'
@@ -41,7 +41,7 @@ if (location.pathname == '/') {
         method: 'GET',
         data: {
           state: $('.filter #state').val().concat(''),
-          room: $('.filter #room').val(),
+          room: $('.filter #room').val().concat(''),
           repository: $('.filter #repository').val().concat('')
         },
         dataType: 'script'
@@ -49,6 +49,12 @@ if (location.pathname == '/') {
     })).change(notify)
 
     $('.js-states').select2({
+      placeholder: '',
+      allowClear: true,
+      theme: 'bootstrap4'
+    })
+
+    $('.js-rooms').select2({
       placeholder: '',
       allowClear: true,
       theme: 'bootstrap4'
@@ -72,13 +78,13 @@ if (location.pathname == '/') {
           $(data.node).replaceWith(data.html)
         } else {
           let states = $('.filter #state').val(),
-              room_id = $('.filter #room').val(),
+              room_ids = $('.filter #room').val(),
               repository_ids = $('.filter #repository').val()
 
           if (!states.includes(data.state))
             return
 
-          if (!(room_id.length == 0 || room_id == data.room_id))
+          if (!(room_ids.length == 0 || room_ids.includes(data.room_id)))
             return
 
           if (!(repository_ids.length == 0 || repository_ids.includes(data.repository_id)))

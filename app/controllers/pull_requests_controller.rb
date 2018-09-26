@@ -4,7 +4,7 @@ class PullRequestsController < ApplicationController
   def index
     @pull_requests = PullRequest.left_outer_joins(:user)
                                 .by_state(helpers.selected_states)
-                                .by_room(helpers.selected_room)
+                                .by_room(helpers.selected_rooms)
                                 .by_repository(helpers.selected_repositories)
                                 .newest.page params[:page]
 
@@ -17,7 +17,7 @@ class PullRequestsController < ApplicationController
   def status
     count = PullRequest.left_outer_joins(:user)
                        .by_state([:ready])
-                       .by_room(helpers.selected_room)
+                       .by_room(helpers.selected_rooms)
                        .by_repository(helpers.selected_repositories)
                        .count
 
@@ -43,7 +43,7 @@ class PullRequestsController < ApplicationController
 
   def save_session
     current_user.update last_states: helpers.selected_states,
-      last_room: helpers.selected_room,
+      last_rooms: helpers.selected_rooms,
       last_repositories: helpers.selected_repositories
   end
 

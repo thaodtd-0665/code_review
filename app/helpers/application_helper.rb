@@ -12,11 +12,11 @@ module ApplicationHelper
     end
   end
 
-  def selected_room
+  def selected_rooms
     if params[:room].nil?
-      current_user.last_room
+      current_user.last_rooms
     else
-      params[:room].to_s
+      params[:room].to_a.reject(&:blank?)
     end
   end
 
@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def room_options
-    options_from_collection_for_select Room.all, :id, :name, selected_room
+    options_from_collection_for_select Room.all, :id, :name, selected_rooms
   end
 
   def repository_options
