@@ -14,6 +14,18 @@ class PullRequestsController < ApplicationController
     end
   end
 
+  def status
+    count = PullRequest.left_outer_joins(:user)
+                       .by_state([:ready])
+                       .by_room(helpers.selected_room)
+                       .by_repository(helpers.selected_repositories)
+                       .count
+
+    render json: {
+      count: count
+    }
+  end
+
   def update
     if @pull_request.update pull_request_params
       respond_to :js

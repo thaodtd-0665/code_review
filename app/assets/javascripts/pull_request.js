@@ -7,6 +7,21 @@ if (location.pathname == '/') {
       }
     }
 
+    let title = document.title
+    let notify = debounce(function() {
+      $.ajax({
+        url: '/pull_requests/status',
+        method: 'GET',
+        data: {
+          room: $('.filter #room').val(),
+          repository: $('.filter #repository').val().concat('')
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        document.title = data.count > 0 ? `(${data.count}) ${title}` : title
+      })
+    }, 1000)
+
     $('time.timeago').timeago()
 
     $('.filter select').change(debounce(function() {
@@ -33,36 +48,36 @@ if (location.pathname == '/') {
       allowClear: true,
       theme: 'bootstrap4'
     })
-  })
 
-  App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {
-    connected: function() {
-      $('.offline-notification').hide()
-    },
-    disconnected: function() {
-      $('.offline-notification').show()
-    },
-    received: function(data) {
-      if ($(data.node).length) {
-        $(data.node).replaceWith(data.html)
-      } else {
-        let states = $('.filter #state').val(),
-            room_id = $('.filter #room').val(),
-            repository_ids = $('.filter #repository').val()
+    App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {
+      connected: function() {
+        $('.offline-notification').hide(), notify()
+      },
+      disconnected: function() {
+        $('.offline-notification').show()
+      },
+      received: function(data) {
+        if ($(data.node).length) {
+          $(data.node).replaceWith(data.html)
+        } else {
+          let states = $('.filter #state').val(),
+              room_id = $('.filter #room').val(),
+              repository_ids = $('.filter #repository').val()
 
-        if (!states.includes(data.state))
-          return
+          if (!states.includes(data.state))
+            return
 
-        if (!(room_id.length == 0 || room_id == data.room_id))
-          return
+          if (!(room_id.length == 0 || room_id == data.room_id))
+            return
 
-        if (!(repository_ids.length == 0 || repository_ids.includes(data.repository_id)))
-          return
+          if (!(repository_ids.length == 0 || repository_ids.includes(data.repository_id)))
+            return
 
-        $('tbody').prepend(data.html)
+          $('tbody').prepend(data.html)
+        }
+
+        $(`${data.node} time.timeago`).timeago(), notify()
       }
-
-      $(`${data.node} time.timeago`).timeago()
-    }
+    })
   })
 }
