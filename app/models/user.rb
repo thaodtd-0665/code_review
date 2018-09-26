@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   enum role: %i[normal reviewer]
 
-  store_accessor :settings, :last_states, :last_room, :last_repositories
+  store_accessor :settings, :last_states, :last_rooms, :last_repositories
 
   belongs_to :room, optional: true
   has_many :pull_requests, dependent: :destroy
@@ -22,8 +22,8 @@ class User < ApplicationRecord
     super || [1, 2]
   end
 
-  def last_room
-    super || room_id
+  def last_rooms
+    super || [room_id]
   end
 
   def last_repositories
