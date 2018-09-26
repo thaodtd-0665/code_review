@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   resource :profile, only: %i[show update destroy]
 
-  resources :pull_requests, only: %i[index update]
+  resources :pull_requests, only: %i[index update] do
+    get :status, on: :collection
+  end
+
   resources :hooks, only: %i[create]
 end
