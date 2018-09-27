@@ -1,4 +1,4 @@
 <% if @pull_request.state_reviewing? %>
   window.open('<%= @pull_request.html_url %>', '_blank') ||
-    alert('Please allow popups for this website')
+    alert('Trình duyệt của bạn đang chặn popup. Vui lòng cho phép để mở liên kết.')
 <% end %>
