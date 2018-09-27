@@ -11,7 +11,8 @@
       </div>
 
       <% unless current_user.chatwork? %>
-        <div class="form-group">        
+        <div class="form-group">
+          <i class="icon-required">*</i>
           <label>ChatWork</label>
           <%= link_to "Connect with ChatWork", "/auth/chatwork",
             class: "btn btn-block btn-sm btn-info mb-2" %>
@@ -19,6 +20,7 @@
       <% end %>
 
       <div class="form-group">
+        <i class="icon-required">*</i>
         <%= form.label :room_id %>
         <%= form.select :room_id,
           options_from_collection_for_select(Room.all, :id, :name, current_user.room_id),
