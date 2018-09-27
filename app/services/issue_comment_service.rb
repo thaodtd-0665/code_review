@@ -12,8 +12,10 @@ class IssueCommentService
   def call
     return unless valid?
 
-    @pull_request = PullRequest.find_by pull_request_params
-    return if pull_request.nil? || pull_request.state_closed?
+    @pull_request = PullRequest.find_or_initialize_by pull_request_params
+    @pull_request.assign_attributes pull_request_info
+
+    return if pull_request.state_merged? || pull_request.state_closed?
 
     if issue_user_id == comment_user_id
       normal_issue_command
@@ -44,6 +46,14 @@ class IssueCommentService
     @pull_request_params ||= {
       repository_id: payload[:repository][:id],
       number: payload[:issue][:number]
+    }
+  end
+
+  def pull_request_info
+    @pull_request_info ||= {
+      full_name: payload[:repository][:full_name],
+      title: payload[:issue][:title],
+      user_id: payload[:issue][:user][:id]
     }
   end
 
