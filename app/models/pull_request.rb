@@ -9,14 +9,7 @@ class PullRequest < ApplicationRecord
   before_save :remove_current_reviewer, on: :update
   after_create_commit{sync_data}
   after_update_commit{sync_data if previous_changes.key?(:state)}
-
-  # after_update_commit do
-  #   previous_changes.key?(:state) || return
-  #   sync_data
-
-  #   state_merged? || return
-  #   user&.increment! :merged
-  # end
+  after_update_commit{user&.increment!(:merged) if state_merged?}
 
   scope :newest, ->{order updated_at: :desc}
 
