@@ -1,11 +1,12 @@
 module SessionsHelper
   def log_in user
-    cookies.encrypted[:user_id] = {value: user.id, expires: 3.days}
+    session[:user_id] = user.id
+    cookies.encrypted[:user_id] = user.id
   end
 
   def current_user
-    return unless cookies.encrypted[:user_id]
-    @current_user ||= User.find_by id: cookies.encrypted[:user_id]
+    return unless session[:user_id]
+    @current_user ||= User.find_by id: session[:user_id]
   end
 
   def logged_in?
@@ -13,6 +14,7 @@ module SessionsHelper
   end
 
   def log_out
+    session.delete :user_id
     cookies.delete :user_id
     @current_user = nil
   end

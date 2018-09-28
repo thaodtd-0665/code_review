@@ -18,10 +18,8 @@ class OmniauthCallbacksController < ApplicationController
   private
 
   def redirect_or_settings user
-    if user.chatwork? && user.room_id?
-      redirect_to root_path
-    else
-      redirect_to profile_path
-    end
+    return redirect_to pull_requests_path if user.reviewer?
+    return redirect_to root_path if user.chatwork?
+    redirect_to profile_path
   end
 end
