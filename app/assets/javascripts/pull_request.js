@@ -1,4 +1,4 @@
-if (location.pathname == '/') {
+if (location.pathname == '/pull_requests') {
   $(function() {
     FaviconNotification.init({
       color: '#ffc700',

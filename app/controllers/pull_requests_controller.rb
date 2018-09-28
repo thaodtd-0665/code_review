@@ -1,5 +1,6 @@
 class PullRequestsController < ApplicationController
-  before_action :ensure_reviewer!, :load_pull_request, only: :update
+  before_action :ensure_reviewer!, only: %i[index status update]
+  before_action :load_pull_request, only: :update
 
   def index
     @pull_requests = PullRequest.left_outer_joins(:user)
@@ -38,7 +39,12 @@ class PullRequestsController < ApplicationController
 
   def ensure_reviewer!
     return if current_user.reviewer?
-    head :forbidden
+
+    respond_to do |format|
+      format.html{redirect_to root_path}
+      format.js{head :forbidden}
+      format.json{head :forbidden}
+    end
   end
 
   def save_session
