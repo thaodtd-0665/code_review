@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: :rails_admin
 
-  root "pull_requests#index"
+  root "pages#index"
 
   get "/auth/:provider/callback", to: "omniauth_callbacks#create"
   get "/auth/failure", to: "omniauth_callbacks#failure"
