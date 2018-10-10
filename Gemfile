@@ -6,6 +6,7 @@ ruby "2.5.1"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap", "~> 4.1", ">= 4.1.3"
 gem "chatwork", "~> 0.10.0"
+gem "excon", "~> 0.62.0"
 gem "figaro", "~> 1.1", ">= 1.1.1"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
