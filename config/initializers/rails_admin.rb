@@ -6,6 +6,10 @@ RailsAdmin.config do |config|
       flash: {danger: "Access Denied"} unless current_user.admin?
   end
 
+  config.navigation_static_links = {
+    "Sidekiq": "/sidekiq"
+  }
+
   config.actions do
     dashboard
     index
