@@ -8,6 +8,8 @@ class HooksController < ActionController::API
 
     plain =
       case request.headers["X-GitHub-Event"]
+      when "repository"
+        RepositoryService.call payload
       when "pull_request"
         PullRequestService.call payload
       when "issue_comment"
