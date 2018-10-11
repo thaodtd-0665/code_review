@@ -9,7 +9,7 @@ class PullRequest < ApplicationRecord
   before_save :remove_current_reviewer, on: :update
   after_create_commit{sync_data}
   after_update_commit{sync_data if previous_changes.key?(:state)}
-  after_update_commit{check_data}
+  after_update_commit{user&.increment!(:merged) if state_merged?}
 
   scope :newest, ->{order updated_at: :desc}
 
@@ -68,12 +68,5 @@ class PullRequest < ApplicationRecord
       html: PullRequestsController.render(self)
 
     ChatworkService.call self, message
-  end
-
-  def check_data
-    return unless previous_changes.key?(:state) && state_merged?
-
-    user&.increment! :merged
-    IcheckWorker.perform_async repository_id
   end
 end

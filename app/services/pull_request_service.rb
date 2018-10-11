@@ -42,10 +42,11 @@ class PullRequestService
 
   def pull_request_state
     if payload[:pull_request][:merged]
-      "merged"
-    else
-      payload[:pull_request][:state]
+      check_conflicted
+      return "merged"
     end
+
+    payload[:pull_request][:state]
   end
 
   def pull_request_commits
@@ -62,5 +63,9 @@ class PullRequestService
     messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
     messages.push I18n.t("pull_requests.kill") if messages.length.positive?
     messages.join "\n"
+  end
+
+  def check_conflicted
+    IcheckWorker.perform_async pull_request_params
   end
 end
