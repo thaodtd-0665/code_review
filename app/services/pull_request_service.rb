@@ -66,6 +66,6 @@ class PullRequestService
   end
 
   def check_conflicted
-    IcheckWorker.perform_async pull_request_params
+    # IcheckWorker.perform_async pull_request_params
   end
 end
