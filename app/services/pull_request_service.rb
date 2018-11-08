@@ -1,6 +1,8 @@
 class PullRequestService
   attr_reader :payload
 
+  EMOTICONS = ["(tat2)", "(tat3)", "(va)", "(songphi)", "(lengoi)"].freeze
+
   def initialize payload
     @payload = payload
   end
@@ -61,7 +63,7 @@ class PullRequestService
     messages = []
     messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
     messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
-    messages.push I18n.t("pull_requests.kill") if messages.length.positive?
+    messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
   end
 

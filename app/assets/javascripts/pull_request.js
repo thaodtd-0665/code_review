@@ -68,10 +68,10 @@ if (location.pathname == '/pull_requests') {
 
     App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {
       connected: function() {
-        $('.offline-notification').hide(), notify()
+        notify()
       },
       disconnected: function() {
-        $('.offline-notification').show()
+        location.reload()
       },
       received: function(data) {
         if ($(data.node).length) {
