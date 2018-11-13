@@ -1,7 +1,13 @@
 class PullRequestService
   attr_reader :payload
 
-  EMOTICONS = ["(tat2)", "(tat3)", "(va)", "(songphi)", "(lengoi)"].freeze
+  EMOTICONS = [
+    "(tat)", "(tat2)", "(2tat)", "(tat3)", "(tat4)", "(tat5)",
+    "(tat6)", "(tat7)", "(tat8)", "(chem)", "(dam)", "(dam2)",
+    "(dap)", "(dap2)", "(lengoi)", "(songphi)", "(sml)",
+    "(songphi2)", "(va)", "(angry)", "(angry2)", "(hate)",
+    "(chetdi)"
+  ].freeze
 
   def initialize payload
     @payload = payload
@@ -43,11 +49,7 @@ class PullRequestService
   end
 
   def pull_request_state
-    if payload[:pull_request][:merged]
-      check_conflicted
-      return "merged"
-    end
-
+    return "merged" if payload[:pull_request][:merged]
     payload[:pull_request][:state]
   end
 
@@ -65,9 +67,5 @@ class PullRequestService
     messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
     messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
-  end
-
-  def check_conflicted
-    # IcheckWorker.perform_async pull_request_params
   end
 end

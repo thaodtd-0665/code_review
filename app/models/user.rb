@@ -39,9 +39,9 @@ class User < ApplicationRecord
   private
 
   def name_beautifier
-    return if self.name.blank?
+    return if name.blank?
 
-    self.name = self.name.split("\u0028").first.try :strip
+    self.name = name.split("\u0028").first.try :strip
   end
 
   def room_vaild
