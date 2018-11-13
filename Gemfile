@@ -19,11 +19,10 @@ gem "rails", "~> 5.2.1"
 gem "rails_admin", "~> 1.4", ">= 1.4.2"
 gem "redis", "~> 4.0"
 gem "sass-rails", "~> 5.0"
-gem "sidekiq", "~> 5.2", ">= 5.2.2"
 gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "pry-byebug"
   gem "rubocop", "~> 0.54.0", require: false
 end
 

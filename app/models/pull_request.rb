@@ -29,21 +29,8 @@ class PullRequest < ApplicationRecord
     where repository_id: repository_param if repository_param.any?
   end)
 
-  scope :need_check, (lambda do |repository_param|
-    where repository_id: repository_param, state: :ready
-  end)
-
   delegate :name, :room_id, :chatwork, :html_url,
     to: :user, prefix: true, allow_nil: true
-
-  def auto_state
-    url = "https://api.github.com/repos/#{full_name}/pulls/#{number}"
-
-    res = Excon.get url
-    json = JSON.parse res.body, symbolize_names: true
-
-    state_conflicted! if json[:mergeable] == false
-  end
 
   def html_url
     "https://github.com/#{full_name}/pull/#{number}/files"
