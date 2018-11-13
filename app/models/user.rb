@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_save :name_beautifier
+
   enum role: %i[normal reviewer]
 
   store_accessor :settings, :last_states, :last_rooms, :last_repositories
@@ -35,6 +37,12 @@ class User < ApplicationRecord
   end
 
   private
+
+  def name_beautifier
+    return if self.name.blank?
+
+    self.name = self.name.split("\u0028").first.try :strip
+  end
 
   def room_vaild
     return if room_id.nil? || Room.exists?(room_id)

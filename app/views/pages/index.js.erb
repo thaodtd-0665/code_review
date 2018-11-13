@@ -1,0 +1,3 @@
+$('tbody').html('<%= j render @pull_requests %>')
+$('#paginator').html('<%= j paginate @pull_requests, remote: true %>')
+$('html, body').animate({scrollTop: 0}, 800)
