@@ -36,6 +36,10 @@ class User < ApplicationRecord
     "https://github.com/#{login}"
   end
 
+  def warning?
+    !(chatwork? && room_id?)
+  end
+
   private
 
   def name_beautifier

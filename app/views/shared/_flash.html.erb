@@ -1,7 +1,11 @@
-<% if flash.any? %>
-  <div class="flash">
-    <% flash.each do |type, message| %>
-      <%= content_tag :div, message, class: "alert alert-#{type}" %>
-    <% end %>
-  </div>
-<% end %>
+<div class="flash">
+  <% if logged_in? && current_user.warning? %>
+    <div class="alert alert-warning">
+      <%= t "warning_html", link: link_to("Settings", profile_path) %>
+    </div>
+  <% end %>
+
+  <% flash.each do |type, message| %>
+    <%= content_tag :div, message, class: "alert alert-#{type}" %>
+  <% end %>
+</div>
