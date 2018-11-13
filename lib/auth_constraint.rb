@@ -5,9 +5,9 @@
 
 class AuthConstraint
   def matches? request
-    return false unless request.session[:user_id]
+    return false unless request.cookies.encrypted[:user_id]
 
-    user = User.find_by id: request.session[:user_id]
+    user = User.find_by id: request.cookies.encrypted[:user_id]
     user&.admin?
   end
 end
