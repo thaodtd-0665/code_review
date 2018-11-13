@@ -1,4 +1,14 @@
 module ApplicationHelper
+  def full_title page_title = ""
+    base_title = "Code Review - Install and forget"
+
+    if page_title.empty?
+      base_title
+    else
+      "#{page_title} | #{base_title}"
+    end
+  end
+
   def github_app_url
     app_name = ENV.fetch("GITHUB_APP_NAME"){""}
     "https://github.com/apps/#{app_name}/installations/new"
