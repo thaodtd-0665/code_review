@@ -13,6 +13,10 @@ class PullRequest < ApplicationRecord
 
   scope :newest, ->{order updated_at: :desc}
 
+  scope :by_single_state, (lambda do |state_param|
+    where state: state_param.to_i unless state_param.blank?
+  end)
+
   scope :by_state, (lambda do |state_param|
     where state: state_param if state_param.any?
   end)
