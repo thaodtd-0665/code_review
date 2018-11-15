@@ -16,8 +16,8 @@ class User < ApplicationRecord
 
   delegate :name, to: :room, prefix: true, allow_nil: true
 
-  def display_name
-    name.blank? ? "@#{login}" : name
+  def name
+    super || "@#{login}"
   end
 
   def last_states
@@ -44,7 +44,6 @@ class User < ApplicationRecord
 
   def name_beautifier
     return if name.blank?
-
     self.name = name.split("\u0028").first.try :strip
   end
 
