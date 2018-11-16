@@ -1,22 +1,42 @@
 <% provide :title, "Your pull requests" %>
-<div class="filter">
-  <form id="filter-form">
-    <div class="form-row">
-      <div class="form-group col-md-2">
-        <%= label_tag :state %>
-        <%= select_tag :state, options_for_select(PullRequest.states),
-          include_blank: "All", class: "form-control", data: {remote: true} %>
-      </div>
+<div class="row">
+  <div class="col-lg-8">
+    <h1>Your pull request</h1>
+    <div class="filter">
+      <form id="filter-form">
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <%= label_tag :state %>
+            <%= select_tag :state, options_for_select(PullRequest.states),
+              include_blank: "All", class: "form-control", data: {remote: true} %>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
+
+  <div class="col-lg-4">
+    <strong><%= image_tag "honho", size: "20x20" %> The most active members this month</strong>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fullname</th>
+          <th class="text-center">Merged</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "pages/user", collection: @users, cached: true %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<table class="table">
+<table class="table table-pull-request">
   <thead>
     <tr>
       <th scope="col">Subject</th>
       <th scope="col">State</th>
-      <th scope="col">Owner</th>
       <th scope="col">Reviewer</th>
       <th scope="col">Repository</th>
       <th scope="col">Created</th>
@@ -24,7 +44,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @pull_requests %>
+    <%= render partial: "pages/pull_request", collection: @pull_requests %>
   </tbody>
 </table>
 

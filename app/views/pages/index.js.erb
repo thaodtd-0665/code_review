@@ -1,3 +1,3 @@
-$('tbody').html('<%= j render @pull_requests %>')
+$('.table-pull-request tbody').html('<%= j render partial: "pages/pull_request", collection: @pull_requests %>')
 $('#paginator').html('<%= j paginate @pull_requests, remote: true %>')
 $('html, body').animate({scrollTop: 0}, 800)
