@@ -1,4 +1,4 @@
-$('tbody').html('<%= j render @pull_requests %>')
+$('.table-pull-request tbody').html('<%= j render @pull_requests %>')
 $('#paginator').html('<%= j paginate @pull_requests, remote: true %>')
 $('time.timeago').timeago()
 $('html, body').animate({scrollTop: 0}, 800)

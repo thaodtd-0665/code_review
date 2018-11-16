@@ -6,7 +6,6 @@
   <td>
     <%= tag.span pull_request.state, class: "state state-#{pull_request.state}" %>
   </td>
-  <td><%= pull_request.user_name %></td>
   <td><%= pull_request.current_reviewer %></td>
   <td>
     <%= link_to pull_request.full_name, pull_request.repository_html_url,
