@@ -1,3 +1,5 @@
+Dir[Rails.root.join("lib", "rails_admin", "*.rb")].each{|file| require file}
+
 RailsAdmin.config do |config|
   config.parent_controller = ApplicationController.name
 
@@ -8,6 +10,7 @@ RailsAdmin.config do |config|
 
   config.actions do
     dashboard
+    reset_merged
     index
     new
     export

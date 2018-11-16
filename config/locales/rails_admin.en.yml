@@ -1,0 +1,7 @@
+en:
+  admin:
+    actions:
+      reset_merged:
+        menu: &reset_merged "Reset Merged"
+        title: *reset_merged
+        breadcrumb: *reset_merged
