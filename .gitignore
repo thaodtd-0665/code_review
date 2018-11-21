@@ -27,4 +27,4 @@
 /config/application.yml
 .DS_Store
 dump.rdb
-/vender/bundle
+/vendor/bundle
