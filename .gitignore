@@ -25,6 +25,7 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/database.yml
 .DS_Store
 dump.rdb
 /vendor/bundle
