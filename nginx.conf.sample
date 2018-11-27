@@ -1,0 +1,39 @@
+upstream code_review_puma {
+  server unix:///usr/local/rails_apps/code_review_production/shared/tmp/sockets/puma.sock;
+}
+
+upstream code_review_websocket {
+  server 0.0.0.0:3030;
+}
+
+server {
+  listen 5000;
+  server_name 172.16.0.18;
+
+  root /usr/local/rails_apps/code_review_production/current/public;
+  access_log /usr/local/rails_apps/code_review_production/shared/log/nginx.access.log;
+  error_log /usr/local/rails_apps/code_review_production/shared/log/nginx.error.log debug;
+
+  try_files $uri/index.html $uri @code_review_puma;
+
+  location @code_review_puma {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header Host $http_host;
+
+    proxy_pass http://code_review_puma;
+    proxy_redirect off;
+  }
+
+  location /cable {
+    proxy_pass http://code_review_websocket;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 10M;
+  keepalive_timeout 10;
+}
