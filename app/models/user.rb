@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validate :room_vaild, on: :update
 
   scope :select_merged, (lambda do
-    select :id, :name, :login, :merged
+    select :id, :name, :login, :merged, :room_id
   end)
 
   scope :merged_great_than, (lambda do |number_param|
