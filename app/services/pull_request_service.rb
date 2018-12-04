@@ -5,7 +5,7 @@ class PullRequestService
     "(tat)", "(tat2)", "(2tat)", "(tat3)", "(tat4)", "(tat5)",
     "(tat6)", "(tat7)", "(tat8)", "(chem)", "(dam)", "(dam2)",
     "(dap)", "(dap2)", "(lengoi)", "(songphi)", "(sml)",
-    "(songphi2)", "(va)", "(angry)", "(angry2)", "(hate)",
+    "(songphi2)", "(va)", "(phanno)", "(hate)",
     "(chetdi)"
   ].freeze
 
