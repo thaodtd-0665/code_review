@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   validate :room_vaild, on: :update
 
+  scope :select_merged, (lambda do
+    select :id, :name, :login, :merged
+  end)
+
   scope :merged_great_than, (lambda do |number_param|
     where arel_table[:merged].gt number_param
   end)
