@@ -30,6 +30,8 @@ RailsAdmin.config do |config|
       field :email
       field :role
       field :chatwork
+      field :merged
+      field :room
       field :admin
     end
 
