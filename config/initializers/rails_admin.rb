@@ -13,7 +13,6 @@ RailsAdmin.config do |config|
     reset_merged
     index
     new
-    export
     bulk_delete
     show
     edit
@@ -54,14 +53,5 @@ RailsAdmin.config do |config|
       field :name
       field :description
     end
-  end
-
-  config.model PullRequest.name do
-    field :id
-    field :title
-    field :full_name
-    field :number
-    field :user
-    field :state
   end
 end
