@@ -54,4 +54,18 @@ RailsAdmin.config do |config|
       field :description
     end
   end
+
+  config.model PullRequest.name do
+    list do
+      field :id
+      field :title
+      field :full_name
+      field :number
+      field :user
+      field :state
+      field :current_reviewer
+      field :created_at
+      field :updated_at
+    end
+  end
 end
