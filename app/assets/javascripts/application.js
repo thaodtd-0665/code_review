@@ -18,4 +18,5 @@
 //= require bootstrap
 //= require rails-ujs
 //= require cable
+//= require custom
 //= require pull_request
