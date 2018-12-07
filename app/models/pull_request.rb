@@ -33,11 +33,11 @@ class PullRequest < ApplicationRecord
     to: :user, prefix: true, allow_nil: true
 
   def html_url
-    "https://github.com/#{full_name}/pull/#{number}/files"
+    "https://github.com/#{full_name}/pull/#{number}"
   end
 
   def html_path
-    "#{full_name}/pull/#{number}/files"
+    "#{full_name}/pull/#{number}"
   end
 
   def repository_html_url
