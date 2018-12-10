@@ -18,8 +18,11 @@ main {
   margin-bottom: 1rem;
 }
 
-.icon-required {
-  color: #ea4335;
+.avatar {
+  width: 20px;
+  height: 20px;
+  box-sizing: content-box;
+  border: 1px solid #383838;
 }
 
 .state {

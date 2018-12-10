@@ -24,6 +24,10 @@ class User < ApplicationRecord
     super || "@#{login}"
   end
 
+  def avatar
+    super || "avatar_notfound.png"
+  end
+
   def last_states
     super || [1, 2]
   end

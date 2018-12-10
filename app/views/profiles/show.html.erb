@@ -7,8 +7,11 @@
       <div class="form-group">
         <label>ChatWork</label>
         <% if current_user.chatwork? %>
-          <%= link_to "Connected with ChatWork", "#",
-            class: "btn btn-block btn-outline-secondary mb-2 disabled" %>
+          <%= link_to "#", class: "btn btn-block btn-outline-secondary mb-2 disabled" do %>
+            Connected with
+            <%= image_tag current_user.avatar, class: "avatar rounded-circle" %>
+            <%= "#{current_user.name} [##{current_user.chatwork}]" %>
+          <% end %>
         <% else %>
           <%= link_to "Connect with ChatWork", "/auth/chatwork",
             class: "btn btn-block btn-info mb-2" %>
@@ -19,7 +22,7 @@
         <div class="form-group col-md-8">
           <%= form.select :room_id,
             options_from_collection_for_select(Room.all, :id, :name, current_user.room_id),
-            {prompt: "Please select chat box"}, {class: "form-control"} %>
+            {prompt: "Please select a chat box"}, {class: "form-control"} %>
         </div>
         <div class="form-group col-md-4">
           <%= form.button "Update", type: :submit,
