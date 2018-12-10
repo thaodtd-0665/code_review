@@ -8,7 +8,7 @@
         <label>ChatWork</label>
         <% if current_user.chatwork? %>
           <%= link_to "Connected with ChatWork", "#",
-            class: "btn btn-block btn-secondary mb-2 disabled" %>
+            class: "btn btn-block btn-outline-secondary mb-2 disabled" %>
         <% else %>
           <%= link_to "Connect with ChatWork", "/auth/chatwork",
             class: "btn btn-block btn-info mb-2" %>
