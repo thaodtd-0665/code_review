@@ -8,7 +8,6 @@
         <label>ChatWork</label>
         <% if current_user.chatwork? %>
           <%= link_to "#", class: "btn btn-block btn-outline-secondary mb-2 disabled" do %>
-            Connected with
             <%= image_tag current_user.avatar, class: "avatar rounded-circle" %>
             <%= "#{current_user.name} [##{current_user.chatwork}]" %>
           <% end %>
