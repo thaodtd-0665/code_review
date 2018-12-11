@@ -18,5 +18,6 @@
 //= require bootstrap
 //= require rails-ujs
 //= require cable
+//= require pace.min
 //= require custom
 //= require pull_request
