@@ -16,8 +16,8 @@
 //= require favicon-notification
 //= require popper
 //= require bootstrap
+//= require pace.min
 //= require rails-ujs
 //= require cable
-//= require pace.min
 //= require custom
 //= require pull_request
