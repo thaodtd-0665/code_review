@@ -1,6 +1,4 @@
-class ChatworkService
-  attr_reader :pull_request, :message
-
+class ChatworkMessageService
   def initialize pull_request, message
     @pull_request = pull_request
     @message = message
@@ -26,6 +24,7 @@ class ChatworkService
   end
 
   private
+  attr_reader :pull_request, :message
 
   def valid?
     return if pull_request.state_open? && message.blank?

@@ -1,6 +1,4 @@
 class IssueCommentService
-  attr_reader :payload, :pull_request
-
   def initialize payload
     @payload = payload
   end
@@ -25,6 +23,7 @@ class IssueCommentService
   end
 
   private
+  attr_reader :payload, :pull_request
 
   def valid?
     payload[:action] == "created" && payload[:issue][:pull_request].present?

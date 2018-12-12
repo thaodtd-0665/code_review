@@ -1,6 +1,4 @@
 class PullRequestService
-  attr_reader :payload
-
   EMOTICONS = [
     "(tat)", "(tat2)", "(2tat)", "(tat3)", "(tat4)", "(tat5)",
     "(tat6)", "(tat7)", "(tat8)", "(chem)", "(dam)", "(dam2)",
@@ -26,6 +24,7 @@ class PullRequestService
   end
 
   private
+  attr_reader :payload
 
   def valid?
     %w[opened closed reopened].include? payload[:action]
@@ -63,8 +62,8 @@ class PullRequestService
 
   def watching_you
     messages = []
-    messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
-    messages.push I18n.t("pull_requests.changed_files") if changed_files > 15
+    # messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
+    messages.push I18n.t("pull_requests.changed_files") if changed_files > 17
     messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
   end

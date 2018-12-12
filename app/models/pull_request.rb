@@ -58,6 +58,6 @@ class PullRequest < ApplicationRecord
       repository_id: repository_id.to_s,
       html: PullRequestsController.render(self)
 
-    ChatworkService.call self, message
+    ChatworkMessageService.call self, message
   end
 end
