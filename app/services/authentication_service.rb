@@ -1,6 +1,4 @@
 class AuthenticationService
-  attr_reader :auth, :current_user
-
   def initialize auth, current_user
     @auth = auth
     @current_user = current_user
@@ -16,6 +14,7 @@ class AuthenticationService
   end
 
   private
+  attr_reader :auth, :current_user
 
   def valid?
     auth.provider.present? || return
@@ -41,7 +40,12 @@ class AuthenticationService
       name: auth.info.name,
       avatar: auth.info.image,
       email: auth.info.email,
-      chatwork: auth.uid
+      chatwork: auth.uid,
+      room_id: room_id
     }
+  end
+
+  def room_id
+    @room_id ||= ChatworkRoomService.call auth.credentials.token
   end
 end

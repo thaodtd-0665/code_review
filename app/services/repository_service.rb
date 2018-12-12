@@ -1,6 +1,4 @@
 class RepositoryService
-  attr_reader :payload
-
   def initialize payload
     @payload = payload
   end
@@ -16,6 +14,7 @@ class RepositoryService
   end
 
   private
+  attr_reader :payload
 
   def valid?
     %w[deleted].include? payload[:action]
