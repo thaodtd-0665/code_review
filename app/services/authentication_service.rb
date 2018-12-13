@@ -46,6 +46,7 @@ class AuthenticationService
   end
 
   def room_id
-    @room_id ||= ChatworkRoomService.call auth.credentials.token
+    room_ids = ChatworkRoomService.call auth.credentials.token
+    room_ids.length == 1 ? room_ids.first : nil
   end
 end
