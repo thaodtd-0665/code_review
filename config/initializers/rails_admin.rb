@@ -51,6 +51,7 @@ RailsAdmin.config do |config|
     edit do
       field :id
       field :name
+      field :bot_api_token
       field :description
     end
   end
