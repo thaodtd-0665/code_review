@@ -36,10 +36,6 @@ class PullRequest < ApplicationRecord
     "https://github.com/#{full_name}/pull/#{number}"
   end
 
-  def html_path
-    "#{full_name}/pull/#{number}"
-  end
-
   def repository_html_url
     "https://github.com/#{full_name}"
   end

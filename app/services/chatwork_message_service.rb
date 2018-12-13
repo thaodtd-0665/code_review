@@ -11,16 +11,19 @@ class ChatworkMessageService
   def call
     return unless valid?
 
-    status = I18n.t "chatwork.state.#{pull_request.state}"
-    body = I18n.t "chatwork.message", name: pull_request.user_name,
+    room = Room.find_by id: pull_request.user_room_id
+    return if room.nil?
+
+    body = I18n.t "chatwork.messages.#{pull_request.state}",
       chatwork: pull_request.user_chatwork,
+      name: pull_request.user_name,
       number: pull_request.number,
-      status: status,
+      reviewer: pull_request.current_reviewer,
       html_url: pull_request.html_url,
       message: message
 
-    client = ChatWork::Client.new api_key: ENV["CHATWORK_API_TOKEN"]
-    client.create_message room_id: pull_request.user_room_id, body: body
+    client = ChatWork::Client.new api_key: room.api_token
+    client.create_message room_id: room.id, body: body
   end
 
   private
