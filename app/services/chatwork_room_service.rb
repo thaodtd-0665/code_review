@@ -10,10 +10,9 @@ class ChatworkRoomService
   def call
     client = ChatWork::Client.new access_token: access_token
 
-    remote_rooms = client.get_rooms.select{|room| room.type == "group"}
-    remote_room_ids = remote_rooms.pluck :room_id
-    local_room_ids = Room.where(id: remote_room_ids).pluck :id
-    local_room_ids.first
+    remote_groups = client.get_rooms.select{|room| room.type == "group"}
+    remote_group_ids = remote_groups.pluck :room_id
+    Room.where(id: remote_group_ids).pluck :id
   end
 
   private
