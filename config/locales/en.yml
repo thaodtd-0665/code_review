@@ -1,19 +1,53 @@
 en:
   chatwork:
-    state:
-      open: "has been opened (clap)"
-      ready: "is ready. Good luck to you!"
-      reviewing: "is under reviewing"
-      commented: "has been (commented)"
-      conflicted: "is conflicted"
-      merged: "has been (merged)\n:* Please update your redmine ticket!"
-      closed: "has been closed (devil)"
-    message: |-
-      [To:%{chatwork}] %{name}
-      Your pull request no. #%{number} %{status}
-      %{html_url}
+    messages:
+      open: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} has been opened (clap)
+        %{html_url}
 
-      %{message}
+        %{message}
+
+      ready: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} is ready. Good luck to you!
+        %{html_url}
+
+        %{message}
+
+      reviewing: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} is under reviewing by %{reviewer}
+        %{html_url}
+
+      commented: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} has been (commented)
+        %{html_url}
+
+        %{message}
+
+      conflicted: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} is conflicted
+        %{html_url}
+
+        %{message}
+
+      merged: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} has been (merged)
+        --> Please update your redmine ticket!
+        %{html_url}
+
+        %{message}
+
+      closed: |-
+        [To:%{chatwork}] %{name}
+        Your pull request no. #%{number} has been closed (devil)
+        %{html_url}
+
+        %{message}
 
   omniauth_callbacks:
     create:
