@@ -48,8 +48,13 @@ class PullRequestService
   end
 
   def pull_request_state
-    return "merged" if payload[:pull_request][:merged]
-    payload[:pull_request][:state]
+    @pull_request_state ||= begin
+      if payload[:pull_request][:merged]
+        "merged"
+      else
+        payload[:pull_request][:state]
+      end
+    end
   end
 
   def pull_request_commits
@@ -63,7 +68,10 @@ class PullRequestService
   def watching_you
     messages = []
     # messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
-    messages.push I18n.t("pull_requests.changed_files") if changed_files > 17
+    if changed_files > 17 && pull_request_state != "merged"
+      messages.push I18n.t("pull_requests.changed_files")
+    end
+
     messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
   end
