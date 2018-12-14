@@ -17,7 +17,7 @@ en:
 
       reviewing: |-
         [To:%{chatwork}] %{name}
-        Your pull request no. #%{number} is under reviewing by %{reviewer}
+        Your pull request no. #%{number} is under reviewing by 8-) %{reviewer}
         %{html_url}
 
       commented: |-

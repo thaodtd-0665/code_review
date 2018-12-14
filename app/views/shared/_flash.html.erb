@@ -1,6 +1,6 @@
 <div class="flash">
   <% if logged_in? && current_user.warning? %>
-    <div class="alert alert-warning">
+    <div class="alert alert-danger">
       <%= t "warning_html", link: link_to("Settings", profile_path) %>
     </div>
   <% end %>
