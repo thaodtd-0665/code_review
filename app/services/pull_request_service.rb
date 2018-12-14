@@ -68,7 +68,7 @@ class PullRequestService
   def watching_you
     messages = []
     # messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
-    if changed_files > 17 && pull_request_state != "merged"
+    if changed_files > 17 && pull_request_state == "open"
       messages.push I18n.t("pull_requests.changed_files")
     end
 
