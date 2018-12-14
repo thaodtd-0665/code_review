@@ -37,16 +37,6 @@ class PullRequestsController < ApplicationController
 
   private
 
-  def ensure_reviewer!
-    return if current_user.reviewer?
-
-    respond_to do |format|
-      format.html{redirect_to root_path}
-      format.js{head :forbidden}
-      format.json{head :forbidden}
-    end
-  end
-
   def save_session
     current_user.update last_states: helpers.selected_states,
       last_rooms: helpers.selected_rooms,

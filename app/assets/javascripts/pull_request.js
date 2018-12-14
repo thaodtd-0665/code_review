@@ -63,7 +63,11 @@ if (location.pathname == '/pull_requests') {
     $('.js-repositories').select2({
       placeholder: '',
       allowClear: true,
-      theme: 'bootstrap4'
+      theme: 'bootstrap4',
+      ajax: {
+        delay: 500,
+        url: '/repositories'
+      }
     })
 
     App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {

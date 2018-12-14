@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   resources :pull_requests, only: %i[index update] do
     get :status, on: :collection
   end
-
+  resources :repositories, only: %i[index]
   resources :hooks, only: %i[create]
 end
