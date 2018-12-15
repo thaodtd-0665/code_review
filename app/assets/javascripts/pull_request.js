@@ -13,6 +13,8 @@ if (location.pathname == '/pull_requests') {
     }
 
     let title = document.title
+    let ready = new Audio('ready.ogg')
+
     let notify = debounce(function() {
       $.ajax({
         url: '/pull_requests/status',
@@ -98,6 +100,11 @@ if (location.pathname == '/pull_requests') {
         }
 
         $(`${data.node} time.timeago`).timeago(), notify()
+
+        if (data.state == "1")
+          ready.play().catch(err => {
+            // console.log(err)
+          })
       }
     })
   })
