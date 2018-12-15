@@ -7,6 +7,10 @@ class CommentScope
     @message = lines.join boundary
   end
 
+  def valid?
+    PullRequest::STATES.include? command.to_sym
+  end
+
   def command_ready?
     command == "ready"
   end
