@@ -70,7 +70,7 @@ class IssueCommentService
 
   def review_issue_command
     user = User.find_by id: comment_user_id
-    return unless user&.reviewer?
+    return unless user&.reviewer? && comment.valid?
 
     pull_request.assign_attributes comment.command_message
     pull_request.save || pull_request.errors.full_messages.to_sentence

@@ -1,8 +1,9 @@
 class PullRequest < ApplicationRecord
   attr_accessor :message
 
-  enum state: %i[open ready reviewing commented conflicted merged closed],
-    _prefix: true
+  STATES = %i[open ready reviewing commented conflicted merged closed].freeze
+
+  enum state: STATES, _prefix: true
 
   belongs_to :user, optional: true
 
