@@ -1,4 +1,6 @@
-class RepositoryService
+class InstallationService
+  COLUMNS = %i[id full_name].freeze
+
   def initialize payload
     @payload = payload
   end
@@ -10,10 +12,7 @@ class RepositoryService
   def call
     return unless valid?
 
-    repository = Repository.find_by id: repository_params[:id]
-    return if repository
-
-    Repository.create repository_params
+    Repository.import COLUMNS, repositories, on_duplicate_key_ignore: true
   end
 
   private
@@ -23,7 +22,7 @@ class RepositoryService
     %w[created].include? payload[:action]
   end
 
-  def repository_params
-    @repository_params ||= payload[:repository].slice :id, :full_name
+  def repositories
+    @repositories ||= payload[:repositories].pluck :id, :full_name
   end
 end

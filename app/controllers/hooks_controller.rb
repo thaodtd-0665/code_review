@@ -8,6 +8,10 @@ class HooksController < ActionController::API
 
     plain =
       case request.headers["X-GitHub-Event"]
+      when "installation", "integration_installation"
+        InstallationService.call payload
+      when "installation_repositories", "integration_installation_repositories"
+        InstallationRepositoryService.call payload
       when "repository"
         RepositoryService.call payload
       when "pull_request"
@@ -30,7 +34,7 @@ class HooksController < ActionController::API
     signed = sign_data raw_post
     # TODO: secure_compare
     return if request.headers["X-Hub-Signature"] == "sha1=#{signed}"
-    render html: "Signatures didn't match!"
+    render plain: "Signatures didn't match!"
   end
 
   def sign_data body

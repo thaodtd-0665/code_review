@@ -69,4 +69,11 @@ RailsAdmin.config do |config|
       field :updated_at
     end
   end
+
+  config.model Repository.name do
+    edit do
+      field :id
+      field :full_name
+    end
+  end
 end
