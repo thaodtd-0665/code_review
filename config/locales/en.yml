@@ -2,40 +2,40 @@ en:
   chatwork:
     messages:
       open: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} has been opened (clap)
         %{html_url}
 
         %{message}
 
       ready: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} is ready. Good luck to you!
         %{html_url}
 
         %{message}
 
       reviewing: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} is under reviewing by 8-) %{reviewer}
         %{html_url}
 
       commented: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} has been (commented)
         %{html_url}
 
         %{message}
 
       conflicted: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} is conflicted
         %{html_url}
 
         %{message}
 
       merged: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} has been (merged)
         --> Please update your redmine ticket!
         %{html_url}
@@ -43,7 +43,7 @@ en:
         %{message}
 
       closed: |-
-        [To:%{chatwork}] %{name}
+        %{chatwork}
         Your pull request no. #%{number} has been closed (devil)
         %{html_url}
 

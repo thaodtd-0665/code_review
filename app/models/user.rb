@@ -44,6 +44,14 @@ class User < ApplicationRecord
     "https://github.com/#{login}"
   end
 
+  def to_cw
+    "[To:#{chatwork}] #{name}" if chatwork?
+  end
+
+  def to_cc
+    "[CC]#{to_cw}" if chatwork?
+  end
+
   def warning?
     !(chatwork? && room_id?)
   end

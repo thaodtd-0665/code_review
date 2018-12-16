@@ -28,11 +28,21 @@ class ChatworkMessageService
 
   def body
     I18n.t "chatwork.messages.#{pull_request.state}",
-      chatwork: pull_request.user_chatwork,
-      name: pull_request.user_name,
+      chatwork: chatwork,
       number: pull_request.number,
       reviewer: pull_request.current_reviewer,
       html_url: pull_request.html_url,
       message: message
+  end
+
+  def chatwork
+    if pull_request.state_ready? || pull_request.state_merged?
+      Subscription.list(pull_request.repository_id, pull_request.user_id)
+                  .pluck(:subscriber)
+                  .unshift(pull_request.user_to_cw)
+                  .join "\n"
+    else
+      pull_request.user_to_cw
+    end
   end
 end
