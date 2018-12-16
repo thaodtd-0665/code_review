@@ -9,6 +9,7 @@ class PullRequest < ApplicationRecord
 
   before_save :remove_current_reviewer, on: :update
   after_create_commit{sync_data}
+  after_create_commit{subscribe_repository}
   after_update_commit{sync_data if previous_changes.key?(:state)}
   after_update_commit{user&.increment!(:merged) if state_merged?}
 
@@ -30,7 +31,7 @@ class PullRequest < ApplicationRecord
     where repository_id: repository_param if repository_param.any?
   end)
 
-  delegate :name, :room_id, :chatwork, :html_url,
+  delegate :name, :room_id, :chatwork, :to_cw, :to_cc, :html_url,
     to: :user, prefix: true, allow_nil: true
 
   def html_url
@@ -45,6 +46,12 @@ class PullRequest < ApplicationRecord
 
   def remove_current_reviewer
     self.current_reviewer = nil unless state_reviewing?
+  end
+
+  def subscribe_repository
+    subscription = Subscription.create repository_id: repository_id,
+      user_id: user_id, subscriber: user_to_cc
+    puts subscription.errors.full_messages
   end
 
   def sync_data
