@@ -19,7 +19,7 @@ class InstallationRepositoryService
   attr_reader :payload
 
   def valid?
-    %w[added].include? payload[:action]
+    payload[:action] == "added"
   end
 
   def repositories
