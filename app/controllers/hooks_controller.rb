@@ -16,6 +16,8 @@ class HooksController < ActionController::API
         RepositoryService.call payload
       when "pull_request"
         PullRequestService.call payload
+      when "pull_request_review"
+        PullRequestReviewService.call payload
       when "issue_comment"
         IssueCommentService.call payload
       else
