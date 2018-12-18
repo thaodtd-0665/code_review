@@ -15,6 +15,18 @@ main {
   margin: 1rem 0 3rem;
 }
 
+.btn-review {
+  color: #fff;
+  background-color: #F47983;
+  border-color: #F47983;
+
+  &:hover {
+    color: #fff;
+    background-color: #DB5A6B;
+    border-color: #DB5A6B;
+  }
+}
+
 .flash {
   margin-bottom: 1rem;
 }
@@ -55,4 +67,8 @@ main {
 
 .state-closed {
   background-color: #000;
+}
+
+.state-archived {
+  background-color: #929090;
 }

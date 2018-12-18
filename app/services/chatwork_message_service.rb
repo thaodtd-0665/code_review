@@ -23,6 +23,7 @@ class ChatworkMessageService
 
   def valid?
     return if pull_request.state_open? && message.blank?
+    return if pull_request.state_archived?
     pull_request.user_chatwork && pull_request.user_room_id
   end
 

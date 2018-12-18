@@ -28,7 +28,7 @@ class PullRequestsController < ApplicationController
   end
 
   def update
-    if @pull_request.update pull_request_params
+    if pull_request.update pull_request_params
       respond_to :js
     else
       head :bad_request
@@ -36,6 +36,7 @@ class PullRequestsController < ApplicationController
   end
 
   private
+  attr_reader :pull_request
 
   def save_session
     current_user.update last_states: helpers.selected_states,
@@ -45,7 +46,7 @@ class PullRequestsController < ApplicationController
 
   def load_pull_request
     @pull_request = PullRequest.find_by id: params[:id]
-    return if @pull_request
+    return if pull_request
     head :not_found
   end
 
