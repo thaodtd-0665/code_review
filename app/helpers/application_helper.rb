@@ -47,10 +47,10 @@ module ApplicationHelper
   end
 
   def repository_options
-    repositories = PullRequest.distinct
-                              .order(full_name: :asc)
-                              .select :repository_id, :full_name
+    repositories = Repository.where(id: selected_repositories)
+                             .order(created_at: :desc)
+                             .select :id, :full_name
     options_from_collection_for_select repositories,
-      :repository_id, :full_name, selected_repositories
+      :id, :full_name, repositories.ids
   end
 end
