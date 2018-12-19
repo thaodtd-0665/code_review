@@ -1,7 +1,16 @@
 class PullRequest < ApplicationRecord
   attr_accessor :message
 
-  STATES = %i[open ready reviewing commented conflicted merged closed].freeze
+  STATES = {
+    open: 0,
+    ready: 1,
+    reviewing: 2,
+    commented: 3,
+    conflicted: 4,
+    merged: 5,
+    closed: 6,
+    archived: 7
+  }.freeze
 
   enum state: STATES, _prefix: true
 
