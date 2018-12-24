@@ -61,17 +61,16 @@ class PullRequestService
     @pull_request_commits ||= payload[:pull_request][:commits]
   end
 
-  def changed_files
-    @changed_files ||= payload[:pull_request][:changed_files]
+  def changed_files?
+    payload[:pull_request][:state] == "open" || return
+    payload[:pull_request][:number] > 2 || return
+    payload[:pull_request][:changed_files] > 17
   end
 
   def watching_you
     messages = []
     # messages.push I18n.t("pull_requests.commits") if pull_request_commits > 1
-    if changed_files > 17 && pull_request_state == "open"
-      messages.push I18n.t("pull_requests.changed_files")
-    end
-
+    messages.push I18n.t("pull_requests.changed_files") if changed_files?
     messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
   end
