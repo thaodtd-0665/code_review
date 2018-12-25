@@ -40,10 +40,6 @@ class User < ApplicationRecord
     super.to_a
   end
 
-  def html_url
-    "https://github.com/#{login}"
-  end
-
   def to_cw
     "[To:#{chatwork}] #{name}" if chatwork?
   end

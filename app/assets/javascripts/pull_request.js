@@ -80,8 +80,10 @@ if (location.pathname == '/pull_requests') {
         location.reload()
       },
       received: function(data) {
-        if ($(data.node).length) {
-          $(data.node).replaceWith(data.html)
+        let elm = `#pull-request-${data.id}`
+
+        if ($(elm).length) {
+          data.deleted ? $(elm).remove() : $(elm).replaceWith(data.html)
         } else {
           let states = $('.filter #state').val(),
               room_ids = $('.filter #room').val(),
@@ -99,7 +101,7 @@ if (location.pathname == '/pull_requests') {
           $('tbody').prepend(data.html)
         }
 
-        $(`${data.node} time.timeago`).timeago(), notify()
+        $(`${elm} time.timeago`).timeago(), notify()
 
         if (data.state == "1")
           ready.play().catch(err => {

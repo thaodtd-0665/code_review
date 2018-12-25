@@ -16,11 +16,12 @@ class PullRequest < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  before_save :remove_current_reviewer, on: :update
-  after_create_commit{sync_data}
-  after_create_commit{subscribe_repository}
-  after_update_commit{sync_data if previous_changes.key?(:state)}
-  after_update_commit{user&.increment!(:merged) if state_merged?}
+  before_save :delete_current_reviewer, on: :update
+  after_commit :broadcast_content # TODO
+  after_create_commit :subscribe_repository
+  after_create_commit :send_message
+  after_update_commit :send_message, if: :previous_change_state?
+  after_update_commit :increment_merged, if: :state_change_to_merged?
 
   scope :newest, ->{order updated_at: :desc}
 
@@ -43,34 +44,64 @@ class PullRequest < ApplicationRecord
   delegate :name, :room_id, :chatwork, :to_cw, :to_cc, :html_url,
     to: :user, prefix: true, allow_nil: true
 
-  def html_url
-    "https://github.com/#{full_name}/pull/#{number}"
+  def html_path
+    "#{full_name}/pull/#{number}"
   end
 
-  def repository_html_url
-    "https://github.com/#{full_name}"
+  def html_url
+    "https://github.com/#{html_path}"
   end
 
   private
 
-  def remove_current_reviewer
+  def delete_current_reviewer
     self.current_reviewer = nil unless state_reviewing?
   end
 
-  def subscribe_repository
-    subscription = Subscription.create repository_id: repository_id,
-      user_id: user_id, subscriber: user_to_cc
-    puts subscription.errors.full_messages
-  end
-
-  def sync_data
+  def broadcast_content
     ActionCable.server.broadcast "pull_requests",
-      node: "#pull-request-#{id}",
+      id: id, deleted: destroyed?,
       state: state_before_type_cast.to_s,
       room_id: user_room_id.to_s,
       repository_id: repository_id.to_s,
       html: PullRequestsController.render(self)
+  end
 
-    ChatworkMessageService.call self, message
+  def subscribe_repository
+    Subscription.create repository_id: repository_id,
+      user_id: user_id, subscriber: user_to_cc
+  end
+
+  def previous_change_state?
+    previous_changes.key? :state
+  end
+
+  def send_message
+    return if state_open? && message.blank?
+    return if state_archived?
+    return unless user_chatwork && user_room_id
+
+    params = {
+      id: id,
+      url: html_url,
+      state: state,
+      repository_id: repository_id,
+      number: number,
+      reviewer: current_reviewer,
+      message: message,
+      room_id: user_room_id,
+      user_id: user_id,
+      user_cw: user_to_cw
+    }
+
+    ChatworkWorker.perform_async params
+  end
+
+  def state_change_to_merged?
+    previous_change_state? && state_merged?
+  end
+
+  def increment_merged
+    user&.increment! :merged
   end
 end
