@@ -1,10 +1,10 @@
-<%= content_tag :tr, id: "pull-request-#{pull_request.id}" do %>
-  <td>
-    <%= link_to pull_request.html_path, pull_request.html_url,
-      title: pull_request.title, target: "_blank" %>
+<%= content_tag :tr, class: "pull-request", id: "pull-request-#{pull_request.id}" do %>
+  <td class="title">
+    <%= tag.span class: "state state-#{pull_request.state}" %>
+    <%= tag.span pull_request.title, title: pull_request.state %>
   </td>
   <td>
-    <%= tag.span pull_request.state, class: "state state-#{pull_request.state}" %>
+    <%= link_to pull_request.html_path, pull_request.html_url, target: "_blank" %>
   </td>
   <td><%= pull_request.current_reviewer %></td>
   <td>

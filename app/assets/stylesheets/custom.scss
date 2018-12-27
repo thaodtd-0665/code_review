@@ -38,15 +38,43 @@ main {
   border: 1px solid #383838;
 }
 
+.pull-request {
+  .title {
+    max-width: 260px;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #f8f078;
+    box-shadow: 0 0 3px #f8f078;
+  }
+  50% {
+    background-color: #fbbc05;
+    box-shadow: 0 0 10px #fbbc05;
+  }
+  100% {
+    background-color: #f8f078;
+    box-shadow: 0 0 3px #f8f078;
+  }
+}
+
 .state {
-  background-color: #3181fa;
   color: #fff;
-  font-weight: 500;
-  padding: 5px 10px;
+  margin-right: 5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.state-open {
+  background-color: #3181fa;
 }
 
 .state-ready {
   background-color: #fbbc05;
+  animation: glowing 1500ms infinite;
 }
 
 .state-reviewing {
@@ -71,4 +99,16 @@ main {
 
 .state-archived {
   background-color: #929090;
+}
+
+.state-list {
+  list-style: none;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #545353;
+
+  li {
+    display: inline-block;
+    padding: 0 10px;
+  }
 }
