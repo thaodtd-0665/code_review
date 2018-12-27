@@ -1,4 +1,6 @@
 class PullRequestService
+  ACTIONS = %w[opened closed reopened edited].freeze
+
   EMOTICONS = [
     "(tat)", "(tat2)", "(2tat)", "(tat3)", "(tat4)", "(tat5)",
     "(tat6)", "(tat7)", "(tat8)", "(chem)", "(dam)", "(dam2)",
@@ -32,7 +34,7 @@ class PullRequestService
   attr_reader :payload
 
   def valid?
-    %w[opened closed reopened edited].include? payload[:action]
+    ACTIONS.include? payload[:action]
   end
 
   def edited?

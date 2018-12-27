@@ -1,4 +1,6 @@
 class RepositoryService
+  ACTIONS = %w[created deleted].freeze
+
   def initialize payload
     @payload = payload
   end
@@ -11,16 +13,19 @@ class RepositoryService
     return unless valid?
 
     repository = Repository.find_by id: repository_params[:id]
-    return if repository
-
-    Repository.create repository_params
+    return repository&.destroy if deleted?
+    Repository.create(repository_params) unless repository
   end
 
   private
   attr_reader :payload
 
   def valid?
-    payload[:action] == "created"
+    ACTIONS.include? payload[:action]
+  end
+
+  def deleted?
+    payload[:action] == "deleted"
   end
 
   def repository_params
