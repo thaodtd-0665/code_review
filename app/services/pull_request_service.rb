@@ -18,16 +18,25 @@ class PullRequestService
   def call
     return unless valid?
 
-    pull_request = PullRequest.find_or_initialize_by pull_request_params
-    pull_request.assign_attributes pull_request_info
-    pull_request.save || pull_request.errors.full_messages.to_sentence
+    if edited?
+      pull_request = PullRequest.find_by pull_request_params
+      pull_request&.update title: payload[:pull_request][:title]
+    else
+      pull_request = PullRequest.find_or_initialize_by pull_request_params
+      pull_request.assign_attributes pull_request_info
+      pull_request.save || pull_request.errors.full_messages.to_sentence
+    end
   end
 
   private
   attr_reader :payload
 
   def valid?
-    %w[opened closed reopened].include? payload[:action]
+    %w[opened closed reopened edited].include? payload[:action]
+  end
+
+  def edited?
+    payload[:action] == "edited"
   end
 
   def pull_request_params
