@@ -103,10 +103,11 @@ if (location.pathname == '/pull_requests') {
 
         $(`${elm} time.timeago`).timeago(), notify()
 
-        if (data.state == "1")
+        if (data.state == "1" && !data.deleted) {
           ready.play().catch(err => {
-            // console.log(err)
+            console.log(err)
           })
+        }
       }
     })
   })

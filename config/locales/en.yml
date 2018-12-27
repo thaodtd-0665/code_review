@@ -1,4 +1,8 @@
 en:
+  time:
+    formats:
+      default: "%H:%M %m/%d/%Y"
+
   chatwork:
     messages:
       open: |-

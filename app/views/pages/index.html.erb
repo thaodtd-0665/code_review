@@ -1,6 +1,6 @@
 <% provide :title, "Your pull requests" %>
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-7">
     <h1>Your pull request</h1>
     <div class="filter">
       <form id="filter-form">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <strong><%= image_tag "honho.gif", size: "20x20" %> The most active members this month</strong>
     <table class="table table-sm">
       <thead>
@@ -33,11 +33,17 @@
   </div>
 </div>
 
+<ul class="state-list">
+  <% PullRequest::STATES.keys.each do |state| %>
+    <li><%= tag.span class: "state state-#{state}" %><%= state %></li>
+  <% end %>
+</ul>
+
 <table class="table table-pull-request">
   <thead>
     <tr>
+      <th scope="col">Title</th>
       <th scope="col">Subject</th>
-      <th scope="col">State</th>
       <th scope="col">Reviewer</th>
       <th scope="col">Created</th>
       <th scope="col">Updated</th>

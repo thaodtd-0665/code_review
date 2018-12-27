@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
     @users = User.select_merged
                  .merged_great_than(0)
-                 .order(merged: :desc).limit 5
+                 .order(merged: :desc).limit 3
 
     respond_to :html, :js
   end
