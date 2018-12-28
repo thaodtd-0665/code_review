@@ -37,9 +37,16 @@ main {
   border: 1px solid #383838;
 }
 
+.table thead th {
+  border-bottom: 1px solid #dee2e6;
+}
+
 .pull-request {
   .title {
     max-width: 260px;
+  }
+  .reviewer {
+    width: 200px;
   }
 }
 
@@ -105,6 +112,11 @@ main {
   text-align: center;
   margin-bottom: 0.5rem;
   color: #545353;
+
+  &.left {
+    text-align: left;
+    padding-inline-start: 0;
+  }
 
   li {
     display: inline-block;

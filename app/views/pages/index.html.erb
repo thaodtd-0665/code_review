@@ -13,6 +13,12 @@
         </div>
       </form>
     </div>
+
+    <ul class="state-list left">
+      <% PullRequest::STATES.keys.each do |state| %>
+        <li><%= tag.span class: "state state-#{state}" %><%= state %></li>
+      <% end %>
+    </ul>
   </div>
 
   <div class="col-lg-5">
@@ -32,12 +38,6 @@
     </table>
   </div>
 </div>
-
-<ul class="state-list">
-  <% PullRequest::STATES.keys.each do |state| %>
-    <li><%= tag.span class: "state state-#{state}" %><%= state %></li>
-  <% end %>
-</ul>
 
 <table class="table table-pull-request">
   <thead>
