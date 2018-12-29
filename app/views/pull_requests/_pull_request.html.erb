@@ -9,11 +9,10 @@
   <td><%= pull_request.user_name %></td>
   <td class="reviewer text-truncate"><%= pull_request.current_reviewer %></td>
   <td>
-    <%= l pull_request.created_at.in_time_zone("Hanoi") %>
+    <%= time_tag pull_request.created_at.in_time_zone("Hanoi"), class: "timeago" %>
   </td>
   <td>
-    <%= time_tag pull_request.updated_at.in_time_zone("Hanoi"),
-      class: "timeago" %>
+    <%= time_tag pull_request.updated_at.in_time_zone("Hanoi"), class: "timeago" %>
   </td>
   <td>
     <div class="btn-group">
