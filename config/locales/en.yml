@@ -62,3 +62,6 @@ en:
     commits: "This pull request has more than 1 commits"
     changed_files: "This pull request has more than 17 changed files"
   warning_html: "Vui lòng truy cập <strong>%{link}</strong> để cập nhật thông tin Chatwork"
+
+  notifications:
+    processing_repositories: "Your repository is being processed. We'll send you a notification when it's done."

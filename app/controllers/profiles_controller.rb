@@ -1,5 +1,9 @@
 class ProfilesController < ApplicationController
-  def show; end
+  def show
+    return unless params[:setup_action] == "install"
+    flash[:success] = t "notifications.processing_repositories"
+    redirect_to profile_path
+  end
 
   def update
     if current_user.update user_params
