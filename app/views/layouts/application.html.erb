@@ -14,11 +14,13 @@
   </head>
 
   <body>
-    <%= render "layouts/header" if logged_in? %>
+    <%= render "layouts/header" %>
 
     <main class="container-fluid">
       <%= render "shared/flash" %>
       <%= yield %>
     </main>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>
