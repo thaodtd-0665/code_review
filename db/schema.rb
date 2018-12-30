@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_16_051111) do
+ActiveRecord::Schema.define(version: 2018_12_30_145348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_12_16_051111) do
     t.string "current_reviewer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reviewer_picon"
     t.index ["repository_id", "number"], name: "index_pull_requests_on_repository_id_and_number", unique: true
     t.index ["user_id"], name: "index_pull_requests_on_user_id"
   end

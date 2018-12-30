@@ -41,11 +41,16 @@ class User < ApplicationRecord
   end
 
   def to_cw
-    "[To:#{chatwork}] #{name}" if chatwork?
+    "[To:#{chatwork}] #{name}"
   end
 
   def to_cc
-    "[CC]#{to_cw}" if chatwork?
+    "[CC]#{to_cw}"
+  end
+
+  def to_picon
+    return name unless chatwork?
+    "[piconname:#{chatwork}]"
   end
 
   def warning?
