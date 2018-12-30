@@ -17,11 +17,11 @@ class PullRequest < ApplicationRecord
   belongs_to :user, optional: true
 
   before_save :delete_current_reviewer, on: :update
-  after_commit :broadcast_content # TODO
+  after_commit :broadcast_content
   after_create_commit :subscribe_repository
   after_create_commit :send_message
-  after_update_commit :send_message, if: :previous_change_state?
-  after_update_commit :increment_merged, if: :state_change_to_merged?
+  after_update_commit :send_message, if: :state_previously_changed?
+  after_update_commit :increment_merged
 
   scope :newest, ->{order updated_at: :desc}
 
@@ -59,6 +59,7 @@ class PullRequest < ApplicationRecord
   end
 
   def broadcast_content
+    return if previous_changes.empty?
     ActionCable.server.broadcast "pull_requests",
       id: id, deleted: destroyed?,
       state: state_before_type_cast.to_s,
@@ -68,12 +69,9 @@ class PullRequest < ApplicationRecord
   end
 
   def subscribe_repository
+    return unless user_chatwork
     Subscription.create repository_id: repository_id,
       user_id: user_id, subscriber: user_to_cc
-  end
-
-  def previous_change_state?
-    previous_changes.key? :state
   end
 
   def send_message
@@ -87,7 +85,7 @@ class PullRequest < ApplicationRecord
       state: state,
       repository_id: repository_id,
       number: number,
-      reviewer: current_reviewer,
+      reviewer: reviewer_picon,
       message: message,
       room_id: user_room_id,
       user_id: user_id,
@@ -97,11 +95,8 @@ class PullRequest < ApplicationRecord
     ChatworkWorker.perform_async params
   end
 
-  def state_change_to_merged?
-    previous_change_state? && state_merged?
-  end
-
   def increment_merged
+    return unless state_previously_changed? && state_merged?
     user&.increment! :merged
   end
 end
