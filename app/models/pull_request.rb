@@ -55,7 +55,9 @@ class PullRequest < ApplicationRecord
   private
 
   def delete_current_reviewer
-    self.current_reviewer = nil unless state_reviewing?
+    return if state_reviewing?
+    self.current_reviewer = nil
+    self.reviewer_picon = nil
   end
 
   def broadcast_content

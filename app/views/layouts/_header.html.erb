@@ -16,15 +16,14 @@
         </li>
         <% if current_user.admin? %>
           <li class="nav-item">
-            <%= link_to "Admin", rails_admin_path, class: "nav-link" %>
+            <%= link_to "Admin", rails_admin_path, target: "_blank", class: "nav-link" %>
           </li>
         <% end %>
       </ul>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <%= link_to "User guide", "https://goo.gl/q8qWUZ",
-            target: "_blank", class: "nav-link" %>
+          <%= link_to "User guide", "https://goo.gl/q8qWUZ", target: "_blank", class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
