@@ -20,6 +20,8 @@ class PullRequestService
   def call
     return unless valid?
 
+    check_conflict
+
     if edited?
       pull_request = PullRequest.find_by pull_request_params
       pull_request&.update title: payload[:pull_request][:title]
@@ -84,5 +86,10 @@ class PullRequestService
     messages.push I18n.t("pull_requests.changed_files") if changed_files?
     messages.push EMOTICONS.sample if messages.length.positive?
     messages.join "\n"
+  end
+
+  def check_conflict
+    return unless payload[:pull_request][:merged]
+    ConflictWorker.async payload[:repository][:id]
   end
 end
