@@ -90,6 +90,6 @@ class PullRequestService
 
   def check_conflict
     return unless payload[:pull_request][:merged]
-    ConflictWorker.async payload[:repository][:id]
+    ConflictWorker.perform_async payload[:repository][:id]
   end
 end
