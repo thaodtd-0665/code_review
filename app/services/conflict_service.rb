@@ -10,12 +10,17 @@ class ConflictService
   end
 
   def call
-    status = mergeable
+    5.times do
+      status = mergeable
 
-    return conflicted if status == false
-    status.nil? || return
-    sleep 3
-    conflicted if mergeable == false
+      if status.nil?
+        sleep 1
+        next
+      end
+
+      conflicted if status == false
+      break
+    end
   end
 
   private
@@ -33,8 +38,6 @@ class ConflictService
   def mergeable
     resp = Excon.get url
     data = JSON.parse resp.body
-    puts resp.body
-    puts resp.headers
     data["mergeable"]
   end
 end
