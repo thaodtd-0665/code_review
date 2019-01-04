@@ -27,7 +27,7 @@ class ConflictService
   attr_reader :pull_request
 
   def conflicted
-    pull_request.update state: :conflicted, message: "(devil) autobot"
+    pull_request.update state: :conflicted, message: I18n.t(:conflict_detected)
   end
 
   def url
