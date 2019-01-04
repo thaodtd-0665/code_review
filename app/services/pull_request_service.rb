@@ -20,12 +20,11 @@ class PullRequestService
   def call
     return unless valid?
 
-    check_conflict
-
     if edited?
       pull_request = PullRequest.find_by pull_request_params
       pull_request&.update title: payload[:pull_request][:title]
     else
+      check_conflict
       pull_request = PullRequest.find_or_initialize_by pull_request_params
       pull_request.assign_attributes pull_request_info
       pull_request.save || pull_request.errors.full_messages.to_sentence
@@ -89,7 +88,7 @@ class PullRequestService
   end
 
   def check_conflict
-    return unless payload[:pull_request][:merged]
-    ConflictWorker.perform_async payload[:repository][:id]
+    return if pull_request_state != "merged"
+    ConflictWorker.perform_in 5.seconds, payload[:repository][:id]
   end
 end
