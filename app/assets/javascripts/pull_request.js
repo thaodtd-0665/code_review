@@ -13,7 +13,7 @@ if (location.pathname == '/pull_requests') {
     }
 
     let title = document.title
-    let ready = new Audio('ready.ogg')
+    // let ready = new Audio('ready.ogg')
 
     let notify = debounce(function() {
       $.ajax({
@@ -103,11 +103,11 @@ if (location.pathname == '/pull_requests') {
 
         $(`${elm} time.timeago`).timeago(), notify()
 
-        if (data.state == "1" && !data.deleted) {
-          ready.play().catch(err => {
-            console.log(err)
-          })
-        }
+        // if (data.state == "1" && !data.deleted) {
+        //   ready.play().catch(err => {
+        //     console.log(err)
+        //   })
+        // }
       }
     })
   })
