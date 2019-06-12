@@ -7,6 +7,7 @@ class PullRequestsController < ApplicationController
                                 .by_state(helpers.selected_states)
                                 .by_room(helpers.selected_rooms)
                                 .by_repository(helpers.selected_repositories)
+                                .by_language(helpers.selected_languages)
                                 .newest.page params[:page]
 
     respond_to do |format|
@@ -20,6 +21,7 @@ class PullRequestsController < ApplicationController
                        .by_state([:ready])
                        .by_room(helpers.selected_rooms)
                        .by_repository(helpers.selected_repositories)
+                       .by_language(helpers.selected_languages)
                        .count
 
     render json: {
@@ -41,7 +43,8 @@ class PullRequestsController < ApplicationController
   def save_session
     current_user.update last_states: helpers.selected_states,
       last_rooms: helpers.selected_rooms,
-      last_repositories: helpers.selected_repositories
+      last_repositories: helpers.selected_repositories,
+      last_languages: helpers.selected_languages
   end
 
   def load_pull_request

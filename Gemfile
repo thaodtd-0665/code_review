@@ -22,6 +22,7 @@ gem "redis", "~> 4.0"
 gem "sass-rails", "~> 5.0"
 gem "sidekiq", "~> 5.2", ">= 5.2.3"
 gem "uglifier", ">= 1.3.0"
+gem "config"
 
 group :development, :test do
   gem "pry-byebug"

@@ -2,13 +2,15 @@ class User < ApplicationRecord
   before_save :name_beautifier
 
   enum role: %i[normal reviewer]
+  enum language: %i[ruby php java frontend android ios testing]
 
-  store_accessor :settings, :last_states, :last_rooms, :last_repositories
+  store_accessor :settings, :last_states, :last_rooms, :last_repositories, :last_languages
 
   belongs_to :room, optional: true
   has_many :pull_requests, dependent: :destroy
 
   validate :room_vaild, on: :update
+  validates :language, presence: true, on: :update
 
   scope :select_merged, (lambda do
     select :id, :name, :login, :merged, :room_id
@@ -37,6 +39,10 @@ class User < ApplicationRecord
   end
 
   def last_repositories
+    super.to_a
+  end
+
+  def last_languages
     super.to_a
   end
 

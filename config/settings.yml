@@ -1,0 +1,8 @@
+language:
+  ruby: "Ruby"
+  php: "Php"
+  java:  "Java"
+  frontend: "Frontend" 
+  android: "Android" 
+  ios: "IOS" 
+  testing: "Testing"

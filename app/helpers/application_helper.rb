@@ -38,6 +38,14 @@ module ApplicationHelper
     end
   end
 
+  def selected_languages
+    if params[:language].nil?
+      current_user.last_languages
+    else
+      params[:language].to_a.reject(&:blank?)
+    end
+  end
+
   def state_options
     options_for_select PullRequest.states, selected_states
   end
@@ -52,5 +60,9 @@ module ApplicationHelper
                              .select :id, :full_name
     options_from_collection_for_select repositories,
       :id, :full_name, repositories.ids
+  end
+
+  def language_options
+    options_for_select User.languages, selected_languages
   end
 end
