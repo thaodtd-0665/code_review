@@ -2,19 +2,25 @@
 <div class="filter">
   <form id="filter-form" data-remote="true">
     <div class="form-row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <%= label_tag :state %>
         <%= select_tag :state, state_options, multiple: true,
           class: "form-control js-states" %>
       </div>
 
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-3">
+        <%= label_tag :language %>
+        <%= select_tag :language, language_options,
+          multiple: true, class: "form-control js-language" %>
+      </div>
+
+      <div class="form-group col-md-3">
         <%= label_tag :room %>
         <%= select_tag :room, room_options, multiple: true,
           class: "form-control js-rooms" %>
       </div>
 
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-3">
         <%= label_tag :repository %>
         <%= select_tag :repository, repository_options,
           multiple: true, class: "form-control js-repositories" %>

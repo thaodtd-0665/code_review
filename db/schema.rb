@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_145348) do
+ActiveRecord::Schema.define(version: 2019_06_12_092558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_145348) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.integer "language", default: 0
     t.index ["chatwork"], name: "index_users_on_chatwork", unique: true
     t.index ["room_id"], name: "index_users_on_room_id"
   end

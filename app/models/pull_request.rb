@@ -41,6 +41,10 @@ class PullRequest < ApplicationRecord
     where repository_id: repository_param if repository_param.any?
   end)
 
+  scope :by_language, (lambda do |language_param|
+    where users: {language: language_param} if language_param.any?
+  end)
+
   delegate :name, :room_id, :chatwork, :to_cw, :to_cc, :html_url,
     to: :user, prefix: true, allow_nil: true
 

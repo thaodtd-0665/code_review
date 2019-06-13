@@ -27,6 +27,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_cable.allowed_request_origins = ["http://localhost:3000"]
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

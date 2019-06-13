@@ -44,7 +44,8 @@ if (location.pathname == '/pull_requests') {
         data: {
           state: $('.filter #state').val().concat(''),
           room: $('.filter #room').val().concat(''),
-          repository: $('.filter #repository').val().concat('')
+          repository: $('.filter #repository').val().concat(''),
+          language: $('.filter #language').val().concat(''),
         },
         dataType: 'script'
       })
@@ -70,6 +71,12 @@ if (location.pathname == '/pull_requests') {
         delay: 500,
         url: '/repositories'
       }
+    })
+
+    $('.js-language').select2({
+      placeholder: '',
+      allowClear: true,
+      theme: 'bootstrap4'
     })
 
     App.pull_request = App.cable.subscriptions.create("PullRequestChannel", {
