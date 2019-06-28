@@ -17,7 +17,7 @@ port 3030
 
 bind "unix:///usr/local/rails_apps/code_review_production/shared/tmp/sockets/puma.sock"
 
-workers 4
+workers 2
 
 plugin :tmp_restart
 
